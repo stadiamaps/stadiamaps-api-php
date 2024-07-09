@@ -1,0 +1,44 @@
+{
+    "name": "stadiamaps/api",
+    "description": "The Stadia Maps Geospatial APIs provide you with the data you need to build awesome applications.",
+    "keywords": [
+        "stadiamaps",
+        "geocoding",
+        "routing",
+        "geospatial",
+        "sdk",
+        "rest",
+        "api"
+    ],
+    "homepage": "https://stadiamaps.com/",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Ian Wagner",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^3.5"
+    },
+    "support": {
+        "email": "support@stadiamaps.com",
+        "source": "https://github.com/stadiamaps/stadiamaps-api-php",
+        "docs": "https://docs.stadiamaps.com/"
+    },
+    "autoload": {
+        "psr-4": { "OpenAPI\\Client\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "OpenAPI\\Client\\Test\\" : "test/" }
+    }
+}
