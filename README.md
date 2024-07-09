@@ -16,19 +16,11 @@ To install the bindings via [Composer](https://getcomposer.org/), add something 
 
 ```json
 {
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/stadiamaps/stadiamaps-api-php.git"
-    }
-  ],
   "require": {
-    "stadiamaps/stadiamaps-api-php": "dev-main"
+    "stadiamaps/stadiamaps-api-php": "1.*"
   }
 }
 ```
-NOTE: When your app goes to production,
-you should probably replace the version constraint with a released version.
 
 Then run `composer install`
 
