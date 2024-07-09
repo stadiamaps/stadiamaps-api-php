@@ -7,12 +7,15 @@ Regenerating the generated portions of the codebase can be done simply with this
 (run this whenever new features / changes to the OpenAPI spec are released).
 
 ```shell
-openapi-generator generate -i https://api.stadiamaps.com/openapi.yaml -g php --strict-spec=true -o . -p disallowAdditionalPropertiesIfNotPresent=false -p composerPackageName="stadiamaps/api"
+openapi-generator generate -i https://api.stadiamaps.com/openapi.yaml -g php --strict-spec=true -o . -p disallowAdditionalPropertiesIfNotPresent=false -p composerPackageName="stadiamaps/api" --global-property apiDocs=false,modelTests=false,modelDocs=false
 ```
 
 ## Tests
 
-TODO
+```bash
+composer install
+vendor/bin/phpunit
+```
 
 ## Release
 
