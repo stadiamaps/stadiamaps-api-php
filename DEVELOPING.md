@@ -12,7 +12,11 @@ openapi-generator generate -i https://api.stadiamaps.com/openapi.yaml -g php --s
 
 ## Tests
 
+Integration tests require a Stadia Maps API key.
+They are run automatically by CI.
+
 ```bash
+export API_KEY=YOUR-API-KEY
 composer install
 vendor/bin/phpunit
 ```
