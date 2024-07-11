@@ -168,6 +168,7 @@ class RoutingApiTest extends TestCase
      *
      * Get turn by turn routing instructions between two or more locations.
      *
+     * @throws ApiException
      */
     public function testRoute()
     {
@@ -178,7 +179,7 @@ class RoutingApiTest extends TestCase
             'costing_options' => array(CostingModel::AUTO => array('use_highways' => 0.3)),
             'units' => DistanceUnit::MI
         ));
-        $result = $this->apiInstance->optimizedRoute($req);
+        $result = $this->apiInstance->route($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
         self::assertEquals(ValhallaLongUnits::MILES, $result->getTrip()->getUnits());
