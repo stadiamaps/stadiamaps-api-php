@@ -35,16 +35,29 @@ require_once('/path/to/OpenAPIClient-php/vendor/autoload.php');
 
 ## Getting Started
 
-Please follow the [installation procedure](#installation--usage) and then run the following:
+First, you'll need a [Stadia Maps API key](https://docs.stadiamaps.com/authentication/#generating-and-revoking-api-keys).
+Then, you can use or require (depending on your installation method) the package.
+Here's a code sample.
 
 ```php
 <?php
-require_once(__DIR__ . '/vendor/autoload.php');
+// Pick one:
+//
+// Composer:
+// use OpenAPI\Client\Configuration;
+// use OpenAPI\Client\Api\GeocodingApi;
+// use OpenAPI\Client\ApiException;
+// use GuzzleHttp;
+//
+// Manual installation:
+// require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure API key authorization
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('api_key', 'YOUR_API_KEY');
+// NOTE: manual installation users will need the full path, like
+// OpenAPI\Client\Configuration
+$config = Configuration::getDefaultConfiguration()->setApiKey('api_key', 'YOUR_API_KEY');
 
-$apiInstance = new OpenAPI\Client\Api\GeocodingApi(
+$apiInstance = new GeocodingApi(
     new GuzzleHttp\Client(),
     $config
 );
@@ -58,3 +71,5 @@ try {
     echo 'Exception when calling GeocodingApi->autocomplete: ', $e->getMessage(), PHP_EOL;
 }
 ```
+
+For more examples, check out the [integration tests](https://github.com/stadiamaps/stadiamaps-api-php/tree/main/test/Api).
