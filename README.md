@@ -1,4 +1,4 @@
-# OpenAPIClient-php
+# Stadia Maps PHP SDK
 
 The Stadia Maps Geospatial APIs provide you with the data you need to build awesome applications.
 
