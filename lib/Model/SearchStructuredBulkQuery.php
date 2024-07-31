@@ -1,6 +1,6 @@
 <?php
 /**
- * RoutingResponseWaypoint
+ * SearchStructuredBulkQuery
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * RoutingResponseWaypoint Class Doc Comment
+ * SearchStructuredBulkQuery Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSerializable
+class SearchStructuredBulkQuery implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'routingResponseWaypoint';
+    protected static $openAPIModelName = 'searchStructuredBulkQuery';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'lat' => 'float',
-        'lon' => 'float',
-        'type' => 'string',
-        'original_index' => 'int'
+        'endpoint' => 'string',
+        'query' => '\OpenAPI\Client\Model\SearchStructuredQuery'
     ];
 
     /**
@@ -72,10 +70,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'lat' => 'double',
-        'lon' => 'double',
-        'type' => null,
-        'original_index' => null
+        'endpoint' => null,
+        'query' => null
     ];
 
     /**
@@ -84,10 +80,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'lat' => false,
-        'lon' => false,
-        'type' => false,
-        'original_index' => false
+        'endpoint' => false,
+        'query' => false
     ];
 
     /**
@@ -176,10 +170,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'lat' => 'lat',
-        'lon' => 'lon',
-        'type' => 'type',
-        'original_index' => 'original_index'
+        'endpoint' => 'endpoint',
+        'query' => 'query'
     ];
 
     /**
@@ -188,10 +180,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'lat' => 'setLat',
-        'lon' => 'setLon',
-        'type' => 'setType',
-        'original_index' => 'setOriginalIndex'
+        'endpoint' => 'setEndpoint',
+        'query' => 'setQuery'
     ];
 
     /**
@@ -200,10 +190,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'lat' => 'getLat',
-        'lon' => 'getLon',
-        'type' => 'getType',
-        'original_index' => 'getOriginalIndex'
+        'endpoint' => 'getEndpoint',
+        'query' => 'getQuery'
     ];
 
     /**
@@ -247,23 +235,17 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
-    public const TYPE__BREAK = 'break';
-    public const TYPE_THROUGH = 'through';
-    public const TYPE_VIA = 'via';
-    public const TYPE_BREAK_THROUGH = 'break_through';
+    public const ENDPOINT_V1_SEARCH_STRUCTURED = '/v1/search/structured';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getTypeAllowableValues()
+    public function getEndpointAllowableValues()
     {
         return [
-            self::TYPE__BREAK,
-            self::TYPE_THROUGH,
-            self::TYPE_VIA,
-            self::TYPE_BREAK_THROUGH,
+            self::ENDPOINT_V1_SEARCH_STRUCTURED,
         ];
     }
 
@@ -282,10 +264,8 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('lat', $data ?? [], null);
-        $this->setIfExists('lon', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], 'break');
-        $this->setIfExists('original_index', $data ?? [], null);
+        $this->setIfExists('endpoint', $data ?? [], null);
+        $this->setIfExists('query', $data ?? [], null);
     }
 
     /**
@@ -315,39 +295,13 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['lat'] === null) {
-            $invalidProperties[] = "'lat' can't be null";
-        }
-        if (($this->container['lat'] > 90)) {
-            $invalidProperties[] = "invalid value for 'lat', must be smaller than or equal to 90.";
-        }
-
-        if (($this->container['lat'] < -90)) {
-            $invalidProperties[] = "invalid value for 'lat', must be bigger than or equal to -90.";
-        }
-
-        if ($this->container['lon'] === null) {
-            $invalidProperties[] = "'lon' can't be null";
-        }
-        if (($this->container['lon'] > 180)) {
-            $invalidProperties[] = "invalid value for 'lon', must be smaller than or equal to 180.";
-        }
-
-        if (($this->container['lon'] < -180)) {
-            $invalidProperties[] = "invalid value for 'lon', must be bigger than or equal to -180.";
-        }
-
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        $allowedValues = $this->getEndpointAllowableValues();
+        if (!is_null($this->container['endpoint']) && !in_array($this->container['endpoint'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
+                "invalid value '%s' for 'endpoint', must be one of '%s'",
+                $this->container['endpoint'],
                 implode("', '", $allowedValues)
             );
-        }
-
-        if (!is_null($this->container['original_index']) && ($this->container['original_index'] < 0)) {
-            $invalidProperties[] = "invalid value for 'original_index', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -366,140 +320,65 @@ class RoutingResponseWaypoint implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets lat
-     *
-     * @return float
-     */
-    public function getLat()
-    {
-        return $this->container['lat'];
-    }
-
-    /**
-     * Sets lat
-     *
-     * @param float $lat The latitude of a point in the shape.
-     *
-     * @return self
-     */
-    public function setLat($lat)
-    {
-        if (is_null($lat)) {
-            throw new \InvalidArgumentException('non-nullable lat cannot be null');
-        }
-
-        if (($lat > 90)) {
-            throw new \InvalidArgumentException('invalid value for $lat when calling RoutingResponseWaypoint., must be smaller than or equal to 90.');
-        }
-        if (($lat < -90)) {
-            throw new \InvalidArgumentException('invalid value for $lat when calling RoutingResponseWaypoint., must be bigger than or equal to -90.');
-        }
-
-        $this->container['lat'] = $lat;
-
-        return $this;
-    }
-
-    /**
-     * Gets lon
-     *
-     * @return float
-     */
-    public function getLon()
-    {
-        return $this->container['lon'];
-    }
-
-    /**
-     * Sets lon
-     *
-     * @param float $lon The longitude of a point in the shape.
-     *
-     * @return self
-     */
-    public function setLon($lon)
-    {
-        if (is_null($lon)) {
-            throw new \InvalidArgumentException('non-nullable lon cannot be null');
-        }
-
-        if (($lon > 180)) {
-            throw new \InvalidArgumentException('invalid value for $lon when calling RoutingResponseWaypoint., must be smaller than or equal to 180.');
-        }
-        if (($lon < -180)) {
-            throw new \InvalidArgumentException('invalid value for $lon when calling RoutingResponseWaypoint., must be bigger than or equal to -180.');
-        }
-
-        $this->container['lon'] = $lon;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
+     * Gets endpoint
      *
      * @return string|null
      */
-    public function getType()
+    public function getEndpoint()
     {
-        return $this->container['type'];
+        return $this->container['endpoint'];
     }
 
     /**
-     * Sets type
+     * Sets endpoint
      *
-     * @param string|null $type A `break` represents the start or end of a leg, and allows reversals. A `through` location is an intermediate waypoint that must be visited between `break`s, but at which reversals are not allowed. A `via` is similar to a `through` except that reversals are allowed. A `break_through` is similar to a `break` in that it can be the start/end of a leg, but does not allow reversals.
+     * @param string|null $endpoint endpoint
      *
      * @return self
      */
-    public function setType($type)
+    public function setEndpoint($endpoint)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($endpoint)) {
+            throw new \InvalidArgumentException('non-nullable endpoint cannot be null');
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        $allowedValues = $this->getEndpointAllowableValues();
+        if (!in_array($endpoint, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
+                    "Invalid value '%s' for 'endpoint', must be one of '%s'",
+                    $endpoint,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['type'] = $type;
+        $this->container['endpoint'] = $endpoint;
 
         return $this;
     }
 
     /**
-     * Gets original_index
+     * Gets query
      *
-     * @return int|null
+     * @return \OpenAPI\Client\Model\SearchStructuredQuery|null
      */
-    public function getOriginalIndex()
+    public function getQuery()
     {
-        return $this->container['original_index'];
+        return $this->container['query'];
     }
 
     /**
-     * Sets original_index
+     * Sets query
      *
-     * @param int|null $original_index The original index of the location (locations may be reordered for optimized routes)
+     * @param \OpenAPI\Client\Model\SearchStructuredQuery|null $query query
      *
      * @return self
      */
-    public function setOriginalIndex($original_index)
+    public function setQuery($query)
     {
-        if (is_null($original_index)) {
-            throw new \InvalidArgumentException('non-nullable original_index cannot be null');
+        if (is_null($query)) {
+            throw new \InvalidArgumentException('non-nullable query cannot be null');
         }
-
-        if (($original_index < 0)) {
-            throw new \InvalidArgumentException('invalid value for $original_index when calling RoutingResponseWaypoint., must be bigger than or equal to 0.');
-        }
-
-        $this->container['original_index'] = $original_index;
+        $this->container['query'] = $query;
 
         return $this;
     }

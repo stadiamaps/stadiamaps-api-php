@@ -18,6 +18,8 @@ lib/Model/BaseCostingOptions.php
 lib/Model/BaseTraceRequest.php
 lib/Model/BicycleCostingOptions.php
 lib/Model/BikeNetwork.php
+lib/Model/BulkRequest.php
+lib/Model/BulkSearchResponse.php
 lib/Model/Contour.php
 lib/Model/Coordinate.php
 lib/Model/CostingModel.php
@@ -89,6 +91,10 @@ lib/Model/RouteTrip.php
 lib/Model/RoutingResponseWaypoint.php
 lib/Model/RoutingWaypoint.php
 lib/Model/RoutingWaypointAllOfSearchFilter.php
+lib/Model/SearchBulkQuery.php
+lib/Model/SearchQuery.php
+lib/Model/SearchStructuredBulkQuery.php
+lib/Model/SearchStructuredQuery.php
 lib/Model/SimpleRoutingWaypoint.php
 lib/Model/Speeds.php
 lib/Model/TraceAttributeFilterOptions.php

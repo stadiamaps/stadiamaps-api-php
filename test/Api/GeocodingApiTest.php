@@ -15,6 +15,11 @@ use OpenAPI\Client\Configuration;
 use OpenAPI\Client\Api\GeocodingApi;
 use OpenAPI\Client\ApiException;
 use GuzzleHttp;
+use OpenAPI\Client\Model\BulkRequest;
+use OpenAPI\Client\Model\SearchBulkQuery;
+use OpenAPI\Client\Model\SearchQuery;
+use OpenAPI\Client\Model\SearchStructuredBulkQuery;
+use OpenAPI\Client\Model\SearchStructuredQuery;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,7 +34,7 @@ class GeocodingApiTest extends TestCase
 {
     private GeocodingApi $apiInstance;
     private string $address = 'Põhja pst 27';
-    private array $kultuurikatel = array('coords' => [24.750645,59.444351], 'gid' => 'openstreetmap:address:way/109867749');
+    private array $kultuurikatel = array('coords' => [24.750645, 59.444351], 'gid' => 'openstreetmap:address:way/109867749');
 
     /**
      * Setup before running any test cases
@@ -149,5 +154,32 @@ class GeocodingApiTest extends TestCase
         self::assertNotCount(0, $result->getFeatures());
         self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
         self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
+    }
+
+    /**
+     * Test case for searchBulk
+     *
+     * Find locations matching components (multiple requests processed server-side).
+     *
+     * @throws ApiException
+     */
+    public function testSearchBulk()
+    {
+        $requests = array(
+            new SearchBulkQuery(array(
+                "endpoint" => "/v1/search",
+                "query" => new SearchQuery(array("text" => $this->address)))),
+            new SearchStructuredBulkQuery(array(
+                "endpoint" => "/v1/search/structured",
+                "query" => new SearchStructuredQuery(array("address" => $this->address, "country" => "EE", "layers" => ["coarse", "address"]))))
+        );
+        $result = $this->apiInstance->searchBulk($requests);
+        self::assertCount(2, $result);
+
+        foreach ($result as $item) {
+            self::assertEquals(200, $item->getStatus());
+            self::assertEquals('Estonia', $item->getResponse()->getFeatures()[0]->getProperties()->getCountry());
+            self::assertEquals('address', $item->getResponse()->getFeatures()[0]->getProperties()->getLayer());
+        }
     }
 }
