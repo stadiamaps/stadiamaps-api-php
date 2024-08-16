@@ -166,10 +166,10 @@ class GeocodingApiTest extends TestCase
     public function testSearchBulk()
     {
         $requests = array(
-            new SearchBulkQuery(array(
+            new BulkRequest(array(
                 "endpoint" => "/v1/search",
                 "query" => new SearchQuery(array("text" => $this->address)))),
-            new SearchStructuredBulkQuery(array(
+            new BulkRequest(array(
                 "endpoint" => "/v1/search/structured",
                 "query" => new SearchStructuredQuery(array("address" => $this->address, "country" => "EE", "layers" => ["coarse", "address"]))))
         );

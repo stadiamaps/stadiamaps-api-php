@@ -1,6 +1,6 @@
 <?php
 /**
- * SearchQuery
+ * BulkRequestQuery
  *
  * PHP version 7.4
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * SearchQuery Class Doc Comment
+ * BulkRequestQuery Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
+class BulkRequestQuery implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'searchQuery';
+    protected static $openAPIModelName = 'BulkRequest_query';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -73,7 +73,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => '\OpenAPI\Client\Model\PeliasLayer[]',
         'sources' => '\OpenAPI\Client\Model\PeliasSource[]',
         'size' => 'int',
-        'lang' => 'string'
+        'lang' => 'string',
+        'address' => 'string',
+        'neighbourhood' => 'string',
+        'borough' => 'string',
+        'locality' => 'string',
+        'county' => 'string',
+        'region' => 'string',
+        'postal_code' => 'string',
+        'country' => 'string'
     ];
 
     /**
@@ -99,7 +107,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => null,
         'sources' => null,
         'size' => null,
-        'lang' => null
+        'lang' => null,
+        'address' => null,
+        'neighbourhood' => null,
+        'borough' => null,
+        'locality' => null,
+        'county' => null,
+        'region' => null,
+        'postal_code' => null,
+        'country' => null
     ];
 
     /**
@@ -123,7 +139,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => false,
         'sources' => false,
         'size' => false,
-        'lang' => false
+        'lang' => false,
+        'address' => false,
+        'neighbourhood' => false,
+        'borough' => false,
+        'locality' => false,
+        'county' => false,
+        'region' => false,
+        'postal_code' => false,
+        'country' => false
     ];
 
     /**
@@ -227,7 +251,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => 'layers',
         'sources' => 'sources',
         'size' => 'size',
-        'lang' => 'lang'
+        'lang' => 'lang',
+        'address' => 'address',
+        'neighbourhood' => 'neighbourhood',
+        'borough' => 'borough',
+        'locality' => 'locality',
+        'county' => 'county',
+        'region' => 'region',
+        'postal_code' => 'postalCode',
+        'country' => 'country'
     ];
 
     /**
@@ -251,7 +283,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => 'setLayers',
         'sources' => 'setSources',
         'size' => 'setSize',
-        'lang' => 'setLang'
+        'lang' => 'setLang',
+        'address' => 'setAddress',
+        'neighbourhood' => 'setNeighbourhood',
+        'borough' => 'setBorough',
+        'locality' => 'setLocality',
+        'county' => 'setCounty',
+        'region' => 'setRegion',
+        'postal_code' => 'setPostalCode',
+        'country' => 'setCountry'
     ];
 
     /**
@@ -275,7 +315,15 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         'layers' => 'getLayers',
         'sources' => 'getSources',
         'size' => 'getSize',
-        'lang' => 'getLang'
+        'lang' => 'getLang',
+        'address' => 'getAddress',
+        'neighbourhood' => 'getNeighbourhood',
+        'borough' => 'getBorough',
+        'locality' => 'getLocality',
+        'county' => 'getCounty',
+        'region' => 'getRegion',
+        'postal_code' => 'getPostalCode',
+        'country' => 'getCountry'
     ];
 
     /**
@@ -351,6 +399,14 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('sources', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('lang', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('neighbourhood', $data ?? [], null);
+        $this->setIfExists('borough', $data ?? [], null);
+        $this->setIfExists('locality', $data ?? [], null);
+        $this->setIfExists('county', $data ?? [], null);
+        $this->setIfExists('region', $data ?? [], null);
+        $this->setIfExists('postal_code', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
     }
 
     /**
@@ -510,10 +566,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($focus_point_lat > 90)) {
-            throw new \InvalidArgumentException('invalid value for $focus_point_lat when calling SearchQuery., must be smaller than or equal to 90.');
+            throw new \InvalidArgumentException('invalid value for $focus_point_lat when calling BulkRequestQuery., must be smaller than or equal to 90.');
         }
         if (($focus_point_lat < -90)) {
-            throw new \InvalidArgumentException('invalid value for $focus_point_lat when calling SearchQuery., must be bigger than or equal to -90.');
+            throw new \InvalidArgumentException('invalid value for $focus_point_lat when calling BulkRequestQuery., must be bigger than or equal to -90.');
         }
 
         $this->container['focus_point_lat'] = $focus_point_lat;
@@ -545,10 +601,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($focus_point_lon > 180)) {
-            throw new \InvalidArgumentException('invalid value for $focus_point_lon when calling SearchQuery., must be smaller than or equal to 180.');
+            throw new \InvalidArgumentException('invalid value for $focus_point_lon when calling BulkRequestQuery., must be smaller than or equal to 180.');
         }
         if (($focus_point_lon < -180)) {
-            throw new \InvalidArgumentException('invalid value for $focus_point_lon when calling SearchQuery., must be bigger than or equal to -180.');
+            throw new \InvalidArgumentException('invalid value for $focus_point_lon when calling BulkRequestQuery., must be bigger than or equal to -180.');
         }
 
         $this->container['focus_point_lon'] = $focus_point_lon;
@@ -580,10 +636,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_rect_min_lat > 90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lat when calling SearchQuery., must be smaller than or equal to 90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lat when calling BulkRequestQuery., must be smaller than or equal to 90.');
         }
         if (($boundary_rect_min_lat < -90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lat when calling SearchQuery., must be bigger than or equal to -90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lat when calling BulkRequestQuery., must be bigger than or equal to -90.');
         }
 
         $this->container['boundary_rect_min_lat'] = $boundary_rect_min_lat;
@@ -615,10 +671,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_rect_max_lat > 90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lat when calling SearchQuery., must be smaller than or equal to 90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lat when calling BulkRequestQuery., must be smaller than or equal to 90.');
         }
         if (($boundary_rect_max_lat < -90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lat when calling SearchQuery., must be bigger than or equal to -90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lat when calling BulkRequestQuery., must be bigger than or equal to -90.');
         }
 
         $this->container['boundary_rect_max_lat'] = $boundary_rect_max_lat;
@@ -650,10 +706,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_rect_min_lon > 180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lon when calling SearchQuery., must be smaller than or equal to 180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lon when calling BulkRequestQuery., must be smaller than or equal to 180.');
         }
         if (($boundary_rect_min_lon < -180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lon when calling SearchQuery., must be bigger than or equal to -180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_min_lon when calling BulkRequestQuery., must be bigger than or equal to -180.');
         }
 
         $this->container['boundary_rect_min_lon'] = $boundary_rect_min_lon;
@@ -685,10 +741,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_rect_max_lon > 180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lon when calling SearchQuery., must be smaller than or equal to 180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lon when calling BulkRequestQuery., must be smaller than or equal to 180.');
         }
         if (($boundary_rect_max_lon < -180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lon when calling SearchQuery., must be bigger than or equal to -180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_rect_max_lon when calling BulkRequestQuery., must be bigger than or equal to -180.');
         }
 
         $this->container['boundary_rect_max_lon'] = $boundary_rect_max_lon;
@@ -720,10 +776,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_circle_lat > 90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_circle_lat when calling SearchQuery., must be smaller than or equal to 90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_circle_lat when calling BulkRequestQuery., must be smaller than or equal to 90.');
         }
         if (($boundary_circle_lat < -90)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_circle_lat when calling SearchQuery., must be bigger than or equal to -90.');
+            throw new \InvalidArgumentException('invalid value for $boundary_circle_lat when calling BulkRequestQuery., must be bigger than or equal to -90.');
         }
 
         $this->container['boundary_circle_lat'] = $boundary_circle_lat;
@@ -755,10 +811,10 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         if (($boundary_circle_lon > 180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_circle_lon when calling SearchQuery., must be smaller than or equal to 180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_circle_lon when calling BulkRequestQuery., must be smaller than or equal to 180.');
         }
         if (($boundary_circle_lon < -180)) {
-            throw new \InvalidArgumentException('invalid value for $boundary_circle_lon when calling SearchQuery., must be bigger than or equal to -180.');
+            throw new \InvalidArgumentException('invalid value for $boundary_circle_lon when calling BulkRequestQuery., must be bigger than or equal to -180.');
         }
 
         $this->container['boundary_circle_lon'] = $boundary_circle_lon;
@@ -951,6 +1007,222 @@ class SearchQuery implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable lang cannot be null');
         }
         $this->container['lang'] = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Gets address
+     *
+     * @return string|null
+     */
+    public function getAddress()
+    {
+        return $this->container['address'];
+    }
+
+    /**
+     * Sets address
+     *
+     * @param string|null $address A street name, optionally with a house number.
+     *
+     * @return self
+     */
+    public function setAddress($address)
+    {
+        if (is_null($address)) {
+            throw new \InvalidArgumentException('non-nullable address cannot be null');
+        }
+        $this->container['address'] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets neighbourhood
+     *
+     * @return string|null
+     */
+    public function getNeighbourhood()
+    {
+        return $this->container['neighbourhood'];
+    }
+
+    /**
+     * Sets neighbourhood
+     *
+     * @param string|null $neighbourhood Varies by area, but has a locally specific meaning (NOT always an official administrative unit).
+     *
+     * @return self
+     */
+    public function setNeighbourhood($neighbourhood)
+    {
+        if (is_null($neighbourhood)) {
+            throw new \InvalidArgumentException('non-nullable neighbourhood cannot be null');
+        }
+        $this->container['neighbourhood'] = $neighbourhood;
+
+        return $this;
+    }
+
+    /**
+     * Gets borough
+     *
+     * @return string|null
+     */
+    public function getBorough()
+    {
+        return $this->container['borough'];
+    }
+
+    /**
+     * Sets borough
+     *
+     * @param string|null $borough A unit within a city (not widely used, but present in places like NYC and Mexico City).
+     *
+     * @return self
+     */
+    public function setBorough($borough)
+    {
+        if (is_null($borough)) {
+            throw new \InvalidArgumentException('non-nullable borough cannot be null');
+        }
+        $this->container['borough'] = $borough;
+
+        return $this;
+    }
+
+    /**
+     * Gets locality
+     *
+     * @return string|null
+     */
+    public function getLocality()
+    {
+        return $this->container['locality'];
+    }
+
+    /**
+     * Sets locality
+     *
+     * @param string|null $locality The city, village, town, etc. that the place/address is part of.
+     *
+     * @return self
+     */
+    public function setLocality($locality)
+    {
+        if (is_null($locality)) {
+            throw new \InvalidArgumentException('non-nullable locality cannot be null');
+        }
+        $this->container['locality'] = $locality;
+
+        return $this;
+    }
+
+    /**
+     * Gets county
+     *
+     * @return string|null
+     */
+    public function getCounty()
+    {
+        return $this->container['county'];
+    }
+
+    /**
+     * Sets county
+     *
+     * @param string|null $county Administrative divisions between localities and regions. Not commonly used as input to structured geocoding.
+     *
+     * @return self
+     */
+    public function setCounty($county)
+    {
+        if (is_null($county)) {
+            throw new \InvalidArgumentException('non-nullable county cannot be null');
+        }
+        $this->container['county'] = $county;
+
+        return $this;
+    }
+
+    /**
+     * Gets region
+     *
+     * @return string|null
+     */
+    public function getRegion()
+    {
+        return $this->container['region'];
+    }
+
+    /**
+     * Sets region
+     *
+     * @param string|null $region Typically the first administrative division within a country. For example, a US state or a Canadian province.
+     *
+     * @return self
+     */
+    public function setRegion($region)
+    {
+        if (is_null($region)) {
+            throw new \InvalidArgumentException('non-nullable region cannot be null');
+        }
+        $this->container['region'] = $region;
+
+        return $this;
+    }
+
+    /**
+     * Gets postal_code
+     *
+     * @return string|null
+     */
+    public function getPostalCode()
+    {
+        return $this->container['postal_code'];
+    }
+
+    /**
+     * Sets postal_code
+     *
+     * @param string|null $postal_code A mail sorting code.
+     *
+     * @return self
+     */
+    public function setPostalCode($postal_code)
+    {
+        if (is_null($postal_code)) {
+            throw new \InvalidArgumentException('non-nullable postal_code cannot be null');
+        }
+        $this->container['postal_code'] = $postal_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string|null $country A full name (ex: Canada), or a 2 or 3 character ISO code. Prefer ISO codes when possible.
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        if (is_null($country)) {
+            throw new \InvalidArgumentException('non-nullable country cannot be null');
+        }
+        $this->container['country'] = $country;
 
         return $this;
     }
