@@ -15,7 +15,10 @@ use OpenAPI\Client\Configuration;
 use OpenAPI\Client\Api\RoutingApi;
 use OpenAPI\Client\ApiException;
 use GuzzleHttp;
+use OpenAPI\Client\Model\AnnotationFilters;
+use OpenAPI\Client\Model\AutoCostingOptions;
 use OpenAPI\Client\Model\CostingModel;
+use OpenAPI\Client\Model\CostingOptions;
 use OpenAPI\Client\Model\DistanceUnit;
 use OpenAPI\Client\Model\IsochroneRequest;
 use OpenAPI\Client\Model\MapMatchRequest;
@@ -186,6 +189,47 @@ class RoutingApiTest extends TestCase
         self::assertCount(1, $result->getTrip()->getLegs());
         self::assertCount(0, $result->getAlternates() ?? []);
         self::assertNotCount(0, $result->getTrip()->getLegs()[0]->getManeuvers());
+    }
+
+    /**
+     * Test case for route
+     *
+     * Get turn by turn routing instructions between two or more locations
+     * using the OSRM response format.
+     *
+     * @throws ApiException
+     */
+    public function testRouteWithNavigationAids()
+    {
+        $req = new RouteRequest();
+        $req->setId('route');
+        $req->setLocations([$this->locationA, $this->locationB]);
+        $req->setCosting(CostingModel::AUTO);
+        $req->setUnits(DistanceUnit::MI);
+        $req->setFormat(RouteRequest::FORMAT_OSRM);
+        $req->setBannerInstructions(true);
+
+        $autoCostingOptions = new AutoCostingOptions();
+        $autoCostingOptions->setUseHighways(0.3);
+        $costingOptions = new CostingOptions();
+        $costingOptions->setAuto($autoCostingOptions);
+        $req->setCostingOptions($costingOptions);
+
+        $filters = new AnnotationFilters();
+        $filters->setAction(AnnotationFilters::ACTION__INCLUDE);
+        $filters->setAttributes(['shape_attributes.speed_limit']);
+        $req->setFilters($filters);
+
+        $result = $this->apiInstance->route($req);
+        self::assertEquals('Ok', $result->getCode());
+        self::assertCount(1, $result->getRoutes());
+        $hasBannerInstructions = false;
+        foreach ($result->getRoutes()[0]->getLegs()[0]->getSteps() as $step) {
+            if (count($step->getBannerInstructions()) > 0) {
+                $hasBannerInstructions = true;
+            }
+        }
+        self::assertTrue($hasBannerInstructions);
     }
 
     /**
