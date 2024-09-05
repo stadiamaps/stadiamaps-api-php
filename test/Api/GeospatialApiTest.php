@@ -15,6 +15,7 @@ use OpenAPI\Client\Configuration;
 use OpenAPI\Client\Api\GeospatialApi;
 use OpenAPI\Client\ApiException;
 use GuzzleHttp;
+use OpenAPI\Client\Model\Coordinate;
 use OpenAPI\Client\Model\HeightRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -73,7 +74,10 @@ class GeospatialApiTest extends TestCase
      */
     public function testElevation()
     {
-        $req = new HeightRequest(array('id' => 'Seoul', 'shape' => [$this->seoul]));
+        $req = (new HeightRequest())
+            ->setId('Seoul')
+            ->setShape([new Coordinate($this->seoul)]);
+
         $result = $this->apiInstance->elevation($req);
         self::assertEquals($req['id'], $result->getId());
         self::assertNotCount(0, $result->getHeight());

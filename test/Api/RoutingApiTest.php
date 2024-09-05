@@ -17,12 +17,15 @@ use OpenAPI\Client\ApiException;
 use GuzzleHttp;
 use OpenAPI\Client\Model\AnnotationFilters;
 use OpenAPI\Client\Model\AutoCostingOptions;
+use OpenAPI\Client\Model\Contour;
+use OpenAPI\Client\Model\Coordinate;
 use OpenAPI\Client\Model\CostingModel;
 use OpenAPI\Client\Model\CostingOptions;
 use OpenAPI\Client\Model\DistanceUnit;
 use OpenAPI\Client\Model\IsochroneRequest;
 use OpenAPI\Client\Model\MapMatchRequest;
 use OpenAPI\Client\Model\MatrixRequest;
+use OpenAPI\Client\Model\MatrixWaypoint;
 use OpenAPI\Client\Model\NearestRoadsRequest;
 use OpenAPI\Client\Model\OptimizedRouteRequest;
 use OpenAPI\Client\Model\RouteRequest;
@@ -84,24 +87,16 @@ class RoutingApiTest extends TestCase
      *
      * Calculate areas of equal travel time from a location.
      *
+     * @throws ApiException
      */
     public function testIsochrone()
     {
-        $req = new IsochroneRequest(array('id' => 'kesklinn',
-            'locations' => [
-                [
-                    'lat' => 59.436884,
-                    'lon' => 24.742595
-                ]
-            ],
-            'costing' => 'pedestrian',
-            'contours' => [
-                array(
-                    'time' => 5,
-                    'color' => 'aabbcc'
-                )
-            ],
-            'polygons' => true));
+        $req = (new IsochroneRequest())
+            ->setId('kesklinn')
+            ->setLocations([(new Coordinate())->setLat(59.436884)->setLon(24.742595)])
+            ->setCosting(CostingModel::PEDESTRIAN)
+            ->setContours([(new Contour())->setTime(5)->setColor('aabbcc')])
+            ->setPolygons(true);
         $result = $this->apiInstance->isochrone($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals("FeatureCollection", $result->getType());
@@ -117,10 +112,11 @@ class RoutingApiTest extends TestCase
      */
     public function testMapMatch()
     {
-        $req = new MapMatchRequest(array('id' => 'mapMatch',
-            'encoded_polyline' => '_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\|@x@pB\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\xAj@tB\fA\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA',
-            'costing' => CostingModel::PEDESTRIAN,
-            'units' => DistanceUnit::MI));
+        $req = (new MapMatchRequest())
+            ->setId('mapMatch')
+            ->setEncodedPolyline('_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\|@x@pB\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\xAj@tB\fA\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA')
+            ->setCosting(CostingModel::PEDESTRIAN)
+            ->setUnits(DistanceUnit::MI);
         $result = $this->apiInstance->mapMatch($req);
         self::assertEquals(0, $result->getTrip()->getStatus());
         self::assertEquals(ValhallaLongUnits::MILES, $result->getTrip()->getUnits());
@@ -137,7 +133,9 @@ class RoutingApiTest extends TestCase
      */
     public function testNearestRoads()
     {
-        $req = new NearestRoadsRequest(array("locations" => [array("lat" => 59.436884, "lon" => 24.742595)], "verbose" => true));
+        $req = (new NearestRoadsRequest())
+            ->setLocations([(new Coordinate())->setLat(59.436884)->setLon(24.742595)])
+            ->setVerbose(true);
         $result = $this->apiInstance->nearestRoads($req);
         self::assertNotCount(0, $result[0]->getEdges());
     }
@@ -151,13 +149,13 @@ class RoutingApiTest extends TestCase
      */
     public function testOptimizedRoute()
     {
-        $req = new OptimizedRouteRequest(array(
-            'id' => 'optimizedRoute',
-            'locations' => [$this->locationA, $this->locationB, $this->locationC, $this->locationA],
-            'costing' => CostingModel::AUTO,
-            'costing_options' => array(CostingModel::AUTO => array('use_highways' => 0.3)),
-            'units' => DistanceUnit::MI
-        ));
+        $req = (new OptimizedRouteRequest())
+            ->setId('optimizedRoute')
+            ->setLocations([new Coordinate($this->locationA), new Coordinate($this->locationB), new Coordinate($this->locationC), new Coordinate($this->locationA)])
+            ->setCosting(CostingModel::AUTO)
+            ->setUnits(DistanceUnit::MI)
+            ->setCostingOptions((new CostingOptions())
+                ->setAuto((new AutoCostingOptions())->setUseHighways(0.3)));
         $result = $this->apiInstance->optimizedRoute($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
@@ -175,13 +173,14 @@ class RoutingApiTest extends TestCase
      */
     public function testRoute()
     {
-        $req = new RouteRequest(array(
-            'id' => 'route',
-            'locations' => [$this->locationA, $this->locationB],
-            'costing' => CostingModel::AUTO,
-            'costing_options' => array(CostingModel::AUTO => array('use_highways' => 0.3)),
-            'units' => DistanceUnit::MI
-        ));
+        $req = (new RouteRequest())
+            ->setId('route')
+            ->setLocations([$this->locationA, $this->locationB])
+            ->setCosting(CostingModel::AUTO)
+            ->setUnits(DistanceUnit::MI)
+            ->setCostingOptions((new CostingOptions())
+                ->setAuto((new AutoCostingOptions())
+                    ->setUseHighways(0.3)));
         $result = $this->apiInstance->route($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
@@ -201,24 +200,18 @@ class RoutingApiTest extends TestCase
      */
     public function testRouteWithNavigationAids()
     {
-        $req = new RouteRequest();
-        $req->setId('route');
-        $req->setLocations([$this->locationA, $this->locationB]);
-        $req->setCosting(CostingModel::AUTO);
-        $req->setUnits(DistanceUnit::MI);
-        $req->setFormat(RouteRequest::FORMAT_OSRM);
-        $req->setBannerInstructions(true);
-
-        $autoCostingOptions = new AutoCostingOptions();
-        $autoCostingOptions->setUseHighways(0.3);
-        $costingOptions = new CostingOptions();
-        $costingOptions->setAuto($autoCostingOptions);
-        $req->setCostingOptions($costingOptions);
-
-        $filters = new AnnotationFilters();
-        $filters->setAction(AnnotationFilters::ACTION__INCLUDE);
-        $filters->setAttributes(['shape_attributes.speed_limit']);
-        $req->setFilters($filters);
+        $req = (new RouteRequest())
+            ->setId('route')
+            ->setLocations([$this->locationA, $this->locationB])
+            ->setCosting(CostingModel::AUTO)
+            ->setUnits(DistanceUnit::MI)
+            ->setFormat(RouteRequest::FORMAT_OSRM)
+            ->setBannerInstructions(true)
+            ->setCostingOptions((new CostingOptions())
+                ->setAuto((new AutoCostingOptions())->setUseHighways(0.3)))
+            ->setFilters((new AnnotationFilters())
+                ->setAction(AnnotationFilters::ACTION__INCLUDE)
+                ->setAttributes(['shape_attributes.speed_limit']));
 
         $result = $this->apiInstance->route($req);
         self::assertEquals('Ok', $result->getCode());
@@ -241,18 +234,17 @@ class RoutingApiTest extends TestCase
      */
     public function testTimeDistanceMatrix()
     {
-        $req = new MatrixRequest(array(
-            'id' => 'matrix',
-            'sources' => [
-                array('lat' => 58.891957, 'lon' => 22.726262),
-                array('lat' => 59.1558, 'lon' => 23.762758),
-            ],
-            'targets' => [
-                array('lat' => 59.176153, 'lon' => 23.846605),
-                array('lat' => 59.562853, 'lon' => 23.096114),
-            ],
-            'costing' => CostingModel::BICYCLE,
-        ));
+        $req = (new MatrixRequest())
+            ->setId('matrix')
+            ->setSources([
+                (new MatrixWaypoint())->setLat(58.891957)->setLon(22.726262),
+                (new MatrixWaypoint())->setLat(59.1558)->setLon(23.762758),
+            ])
+            ->setTargets([
+                (new MatrixWaypoint())->setLat(59.176153)->setLon(23.846605),
+                (new MatrixWaypoint())->setLat(59.562853)->setLon(23.096114),
+            ])
+            ->setCosting(CostingModel::BICYCLE);
         $result = $this->apiInstance->timeDistanceMatrix($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertSameSize($req->getSources(), $result->getSources());
@@ -270,13 +262,12 @@ class RoutingApiTest extends TestCase
      */
     public function testTraceAttributes()
     {
-        $req = new TraceAttributesRequest(array(
-            'id' => 'traceAttributes',
-            'encoded_polyline' => '_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\|@x@pB\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\xAj@tB\fA\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA',
-            'shape_match' => TraceAttributesRequest::SHAPE_MATCH_MAP_SNAP,
-            'costing' => CostingModel::PEDESTRIAN,
-            'units' => DistanceUnit::MI
-        ));
+        $req = (new TraceAttributesRequest())
+            ->setId('traceAttributes')
+            ->setEncodedPolyline('_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\|@x@pB\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\xAj@tB\fA\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA')
+            ->setShapeMatch(TraceAttributesRequest::SHAPE_MATCH_WALK_OR_SNAP)
+            ->setCosting(CostingModel::PEDESTRIAN)
+            ->setUnits(DistanceUnit::MI);
         $result = $this->apiInstance->traceAttributes($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(ValhallaLongUnits::MILES, $result->getUnits());

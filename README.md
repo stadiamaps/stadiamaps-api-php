@@ -73,7 +73,3 @@ try {
 ```
 
 For more examples, check out the [integration tests](https://github.com/stadiamaps/stadiamaps-api-php/tree/main/test/Api).
-Note that most of our examples use associative arrays for brevity,
-but you can also construct empty request classes and uss methods for better IDE autocompletion.
-
-
