@@ -29,9 +29,9 @@ use OpenAPI\Client\Model\MatrixWaypoint;
 use OpenAPI\Client\Model\NearestRoadsRequest;
 use OpenAPI\Client\Model\OptimizedRouteRequest;
 use OpenAPI\Client\Model\RouteRequest;
+use OpenAPI\Client\Model\RoutingLongUnits;
 use OpenAPI\Client\Model\RoutingWaypoint;
 use OpenAPI\Client\Model\TraceAttributesRequest;
-use OpenAPI\Client\Model\ValhallaLongUnits;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -119,7 +119,7 @@ class RoutingApiTest extends TestCase
             ->setUnits(DistanceUnit::MI);
         $result = $this->apiInstance->mapMatch($req);
         self::assertEquals(0, $result->getTrip()->getStatus());
-        self::assertEquals(ValhallaLongUnits::MILES, $result->getTrip()->getUnits());
+        self::assertEquals(RoutingLongUnits::MILES, $result->getTrip()->getUnits());
         self::assertNotCount(0, $result->getTrip()->getLegs());
         self::assertNotCount(0, $result->getTrip()->getLegs()[0]->getManeuvers());
     }
@@ -159,7 +159,7 @@ class RoutingApiTest extends TestCase
         $result = $this->apiInstance->optimizedRoute($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
-        self::assertEquals(ValhallaLongUnits::MILES, $result->getTrip()->getUnits());
+        self::assertEquals(RoutingLongUnits::MILES, $result->getTrip()->getUnits());
         self::assertCount(3, $result->getTrip()->getLegs());
         self::assertNotCount(0, $result->getTrip()->getLegs()[0]->getManeuvers());
     }
@@ -184,7 +184,7 @@ class RoutingApiTest extends TestCase
         $result = $this->apiInstance->route($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
-        self::assertEquals(ValhallaLongUnits::MILES, $result->getTrip()->getUnits());
+        self::assertEquals(RoutingLongUnits::MILES, $result->getTrip()->getUnits());
         self::assertCount(1, $result->getTrip()->getLegs());
         self::assertCount(0, $result->getAlternates() ?? []);
         self::assertNotCount(0, $result->getTrip()->getLegs()[0]->getManeuvers());
@@ -250,7 +250,7 @@ class RoutingApiTest extends TestCase
         self::assertSameSize($req->getSources(), $result->getSources());
         self::assertSameSize($req->getTargets(), $result->getTargets());
         self::assertNotCount(0, $result->getSourcesToTargets());
-        self::assertEquals(ValhallaLongUnits::KILOMETERS, $result->getUnits());
+        self::assertEquals(RoutingLongUnits::KILOMETERS, $result->getUnits());
     }
 
     /**
@@ -270,7 +270,7 @@ class RoutingApiTest extends TestCase
             ->setUnits(DistanceUnit::MI);
         $result = $this->apiInstance->traceAttributes($req);
         self::assertEquals($req->getId(), $result->getId());
-        self::assertEquals(ValhallaLongUnits::MILES, $result->getUnits());
+        self::assertEquals(RoutingLongUnits::MILES, $result->getUnits());
         self::assertNotCount(0, $result->getEdges());
         self::assertNotCount(0, $result->getAdmins());
         self::assertNotCount(0, $result->getMatchedPoints());

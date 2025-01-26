@@ -17,7 +17,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add something 
 ```json
 {
   "require": {
-    "stadiamaps/stadiamaps-api-php": "1.*"
+    "stadiamaps/stadiamaps-api-php": "2.*"
   }
 }
 ```

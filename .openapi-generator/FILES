@@ -38,7 +38,14 @@ lib/Model/GeoJSONGeometryBase.php
 lib/Model/GeoJSONLineString.php
 lib/Model/GeoJSONPoint.php
 lib/Model/GeoJSONPolygon.php
+lib/Model/GeocodeResponse.php
+lib/Model/GeocodingGeoJSONFeature.php
+lib/Model/GeocodingGeoJSONProperties.php
+lib/Model/GeocodingGeoJSONPropertiesAddendum.php
+lib/Model/GeocodingGeoJSONPropertiesAddendumOsm.php
+lib/Model/GeocodingLayer.php
 lib/Model/GeocodingObject.php
+lib/Model/GeocodingSource.php
 lib/Model/HeightRequest.php
 lib/Model/HeightResponse.php
 lib/Model/HighwayClassification.php
@@ -93,13 +100,6 @@ lib/Model/OsrmViaWaypoint.php
 lib/Model/OsrmVoiceInstruction.php
 lib/Model/OsrmWaypoint.php
 lib/Model/PedestrianCostingOptions.php
-lib/Model/PeliasGeoJSONFeature.php
-lib/Model/PeliasGeoJSONProperties.php
-lib/Model/PeliasGeoJSONPropertiesAddendum.php
-lib/Model/PeliasGeoJSONPropertiesAddendumOsm.php
-lib/Model/PeliasLayer.php
-lib/Model/PeliasResponse.php
-lib/Model/PeliasSource.php
 lib/Model/Restrictions.php
 lib/Model/RoadClass.php
 lib/Model/Route200Response.php
@@ -110,6 +110,8 @@ lib/Model/RouteResponse.php
 lib/Model/RouteResponseAlternatesInner.php
 lib/Model/RouteSummary.php
 lib/Model/RouteTrip.php
+lib/Model/RoutingLanguages.php
+lib/Model/RoutingLongUnits.php
 lib/Model/RoutingResponseWaypoint.php
 lib/Model/RoutingWaypoint.php
 lib/Model/RoutingWaypointAllOfSearchFilter.php
@@ -127,8 +129,6 @@ lib/Model/TravelMode.php
 lib/Model/Traversability.php
 lib/Model/TruckCostingOptions.php
 lib/Model/TzResponse.php
-lib/Model/ValhallaLanguages.php
-lib/Model/ValhallaLongUnits.php
 lib/Model/Warning.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
