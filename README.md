@@ -17,7 +17,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add something 
 ```json
 {
   "require": {
-    "stadiamaps/stadiamaps-api-php": "2.*"
+    "stadiamaps/stadiamaps-api-php": "3.*"
   }
 }
 ```
@@ -65,7 +65,7 @@ $apiInstance = new GeocodingApi(
 $text = '1600 Pennsylvania Ave NW'; // The place name (address, venue name, etc.) to search for.
 
 try {
-    $result = $apiInstance->autocomplete($text);
+    $result = $apiInstance->autocompleteV2($text);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GeocodingApi->autocomplete: ', $e->getMessage(), PHP_EOL;

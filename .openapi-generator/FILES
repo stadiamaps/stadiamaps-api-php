@@ -11,6 +11,8 @@ lib/ApiException.php
 lib/Configuration.php
 lib/HeaderSelector.php
 lib/Model/Access.php
+lib/Model/AddendumV2.php
+lib/Model/AddressComponentsV2.php
 lib/Model/AdminRegion.php
 lib/Model/Administrative.php
 lib/Model/AnnotationFilters.php
@@ -22,6 +24,7 @@ lib/Model/BikeNetwork.php
 lib/Model/BulkRequest.php
 lib/Model/BulkRequestQuery.php
 lib/Model/BulkSearchResponse.php
+lib/Model/Context.php
 lib/Model/Contour.php
 lib/Model/Coordinate.php
 lib/Model/CostingModel.php
@@ -32,20 +35,23 @@ lib/Model/EdgeSign.php
 lib/Model/EdgeUse.php
 lib/Model/EndNode.php
 lib/Model/ExtendedDirectionsOptions.php
+lib/Model/FeaturePropertiesV2.php
+lib/Model/FeaturePropertiesV2Properties.php
+lib/Model/FoursquareAddendum.php
 lib/Model/GeoAttributes.php
-lib/Model/GeoJSONGeometry.php
 lib/Model/GeoJSONGeometryBase.php
-lib/Model/GeoJSONLineString.php
 lib/Model/GeoJSONPoint.php
-lib/Model/GeoJSONPolygon.php
 lib/Model/GeocodeResponse.php
+lib/Model/GeocodeResponseEnvelopePropertiesV2.php
 lib/Model/GeocodingGeoJSONFeature.php
 lib/Model/GeocodingGeoJSONProperties.php
 lib/Model/GeocodingGeoJSONPropertiesAddendum.php
 lib/Model/GeocodingGeoJSONPropertiesAddendumOsm.php
 lib/Model/GeocodingLayer.php
+lib/Model/GeocodingMeta.php
 lib/Model/GeocodingObject.php
 lib/Model/GeocodingSource.php
+lib/Model/GeonamesAddendum.php
 lib/Model/HeightRequest.php
 lib/Model/HeightResponse.php
 lib/Model/HighwayClassification.php
@@ -55,6 +61,7 @@ lib/Model/IsochroneFeature.php
 lib/Model/IsochroneProperties.php
 lib/Model/IsochroneRequest.php
 lib/Model/IsochroneResponse.php
+lib/Model/LayerId.php
 lib/Model/LocateDetailedEdge.php
 lib/Model/LocateEdge.php
 lib/Model/LocateEdgeInfo.php
@@ -68,6 +75,7 @@ lib/Model/MapMatchRequest.php
 lib/Model/MapMatchRouteResponse.php
 lib/Model/MapMatchTraceOptions.php
 lib/Model/MapMatchWaypoint.php
+lib/Model/MatchType.php
 lib/Model/MatchedPoint.php
 lib/Model/MatrixCostingModel.php
 lib/Model/MatrixDistance.php
@@ -80,6 +88,7 @@ lib/Model/MotorcycleCostingOptions.php
 lib/Model/NearestRoadsRequest.php
 lib/Model/NodeId.php
 lib/Model/NodeType.php
+lib/Model/OpenStreetMapAddendum.php
 lib/Model/OptimizedRouteRequest.php
 lib/Model/OsrmAdmin.php
 lib/Model/OsrmAnnotation.php
@@ -100,6 +109,10 @@ lib/Model/OsrmViaWaypoint.php
 lib/Model/OsrmVoiceInstruction.php
 lib/Model/OsrmWaypoint.php
 lib/Model/PedestrianCostingOptions.php
+lib/Model/PedestrianType.php
+lib/Model/Point.php
+lib/Model/Precision.php
+lib/Model/PropertiesV2.php
 lib/Model/Restrictions.php
 lib/Model/RoadClass.php
 lib/Model/Route200Response.php
@@ -118,6 +131,8 @@ lib/Model/RoutingWaypointAllOfSearchFilter.php
 lib/Model/SearchQuery.php
 lib/Model/SearchStructuredQuery.php
 lib/Model/SimpleRoutingWaypoint.php
+lib/Model/SourceAttribution.php
+lib/Model/SourceId.php
 lib/Model/Speeds.php
 lib/Model/TraceAttributeFilterOptions.php
 lib/Model/TraceAttributeKey.php
@@ -130,5 +145,8 @@ lib/Model/Traversability.php
 lib/Model/TruckCostingOptions.php
 lib/Model/TzResponse.php
 lib/Model/Warning.php
+lib/Model/WhosOnFirstConcordances.php
+lib/Model/WofContext.php
+lib/Model/WofContextComponent.php
 lib/ObjectSerializer.php
 phpunit.xml.dist

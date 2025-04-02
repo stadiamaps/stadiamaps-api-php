@@ -70,13 +70,13 @@ class GeocodingApiTest extends TestCase
     }
 
     /**
-     * Test case for autocomplete
+     * Test case for autocomplete V1
      *
      * Search and geocode quickly based on partial input.
      *
      * @throws ApiException
      */
-    public function testAutocomplete()
+    public function testAutocompleteV1()
     {
         $result = $this->apiInstance->autocomplete($this->address);
         self::assertNotCount(0, $result->getFeatures());
@@ -85,17 +85,48 @@ class GeocodingApiTest extends TestCase
     }
 
     /**
-     * Test case for place
+     * Test case for autocomplete V2
+     *
+     * Search and geocode quickly based on partial input.
+     *
+     * @throws ApiException
+     */
+    public function testAutocompleteV2()
+    {
+        $result = $this->apiInstance->autocompleteV2($this->address);
+        self::assertNotCount(0, $result->getFeatures());
+        self::assertNull($result->getFeatures()[0]->getProperties()->getContext());
+        self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
+    }
+
+    /**
+     * Test case for place details V1
      *
      * Retrieve details of a place using its GID.
      *
      * @throws ApiException
      */
-    public function testPlace()
+    public function testPlaceDetailsV1()
     {
-        $result = $this->apiInstance->place([$this->kultuurikatel['gid']]);
+        $result = $this->apiInstance->placeDetails([$this->kultuurikatel['gid']]);
         self::assertCount(1, $result->getFeatures());
         self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
+        self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
+    }
+
+    /**
+     * Test case for place details V2
+     *
+     * Retrieve details of a place using its GID.
+     *
+     * @throws ApiException
+     */
+    public function testPlaceDetailsV2()
+    {
+        $result = $this->apiInstance->placeDetailsV2([$this->kultuurikatel['gid']]);
+        self::assertCount(1, $result->getFeatures());
+        self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getContext()->getWhosonfirst()->getCountry()->getName());
+        self::assertEquals('EST', $result->getFeatures()[0]->getProperties()->getContext()->getIso3166A3());
         self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
     }
 
@@ -111,7 +142,6 @@ class GeocodingApiTest extends TestCase
         $result = $this->apiInstance->reverse($this->kultuurikatel['coords'][1], $this->kultuurikatel['coords'][0]);
         self::assertNotCount(0, $result->getFeatures());
         self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
-        self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
     }
 
     /**
