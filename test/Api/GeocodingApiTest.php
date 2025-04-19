@@ -145,6 +145,20 @@ class GeocodingApiTest extends TestCase
     }
 
     /**
+     * Test case for reverse V2
+     *
+     * Find places and addresses near geographic coordinates (reverse geocoding).
+     *
+     * @throws ApiException
+     */
+    public function testReverseV2()
+    {
+        $result = $this->apiInstance->reverseV2($this->kultuurikatel['coords'][1], $this->kultuurikatel['coords'][0]);
+        self::assertNotCount(0, $result->getFeatures());
+        self::assertEquals('EST', $result->getFeatures()[0]->getProperties()->getContext()->getIso3166A3());
+    }
+
+    /**
      * Test case for reverse with an uncommon layer
      *
      * @throws ApiException
@@ -152,6 +166,18 @@ class GeocodingApiTest extends TestCase
     public function testReverseUncommonLayer()
     {
         $result = $this->apiInstance->reverse($this->kultuurikatel['coords'][0], $this->kultuurikatel['coords'][1]);
+        self::assertNotCount(0, $result->getFeatures());
+        self::assertEquals('marinearea', $result->getFeatures()[0]->getProperties()->getLayer());
+    }
+
+    /**
+     * Test case for reverse V2 with an uncommon layer
+     *
+     * @throws ApiException
+     */
+    public function testReverseUncommonLayerV2()
+    {
+        $result = $this->apiInstance->reverseV2($this->kultuurikatel['coords'][0], $this->kultuurikatel['coords'][1]);
         self::assertNotCount(0, $result->getFeatures());
         self::assertEquals('marinearea', $result->getFeatures()[0]->getProperties()->getLayer());
     }
