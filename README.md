@@ -9,6 +9,7 @@ For more information, please visit [https://docs.stadiamaps.com](https://docs.st
 ### Requirements
 
 PHP 7.4 and later.
+(NOTE: Unit tests use PHP 8-style named arguments.)
 
 ### Composer
 
@@ -65,7 +66,8 @@ $apiInstance = new GeocodingApi(
 $text = '1600 Pennsylvania Ave NW'; // The place name (address, venue name, etc.) to search for.
 
 try {
-    $result = $apiInstance->autocompleteV2($text);
+    // We're using a PHP 8-style named argument; PHP 7 users will need to add a bunch of null arguments
+    $result = $apiInstance->autocompleteV2($text, lang: 'en');
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GeocodingApi->autocomplete: ', $e->getMessage(), PHP_EOL;
