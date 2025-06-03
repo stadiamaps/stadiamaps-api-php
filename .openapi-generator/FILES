@@ -9,6 +9,7 @@ lib/Api/GeospatialApi.php
 lib/Api/RoutingApi.php
 lib/ApiException.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/Access.php
 lib/Model/AddendumV2.php
