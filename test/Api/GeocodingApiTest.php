@@ -183,7 +183,7 @@ class GeocodingApiTest extends TestCase
     }
 
     /**
-     * Test case for search
+     * Test case for search V1
      *
      * Search for location and other info using a place name or address (forward geocoding).
      *
@@ -194,6 +194,22 @@ class GeocodingApiTest extends TestCase
         $result = $this->apiInstance->search($this->address, lang: 'en');
         self::assertNotCount(0, $result->getFeatures());
         self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
+        self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
+    }
+
+    /**
+     * Test case for search V2
+     *
+     * Search for location and other info using a place name or address (forward geocoding).
+     *
+     * @throws ApiException
+     */
+    public function testSearchV2()
+    {
+        $result = $this->apiInstance->searchV2($this->address, lang: 'en');
+        self::assertNotCount(0, $result->getFeatures());
+        self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getContext()->getWhosonfirst()->getCountry()->getName());
+        self::assertEquals('EST', $result->getFeatures()[0]->getProperties()->getContext()->getIso3166A3());
         self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
     }
 
