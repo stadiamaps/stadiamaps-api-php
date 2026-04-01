@@ -1,6 +1,6 @@
 <?php
 /**
- * IsochroneProperties
+ * TzResponseV2
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * IsochroneProperties Class Doc Comment
+ * TzResponseV2 Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class TzResponseV2 implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'isochroneProperties';
+    protected static $openAPIModelName = 'tzResponseV2';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +58,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'fill_color' => 'string',
-        'opacity' => 'float',
-        'fill' => 'string',
-        'fill_opacity' => 'float',
-        'color' => 'string',
-        'contour' => 'float',
-        'metric' => 'string'
+        'tz_id' => 'string',
+        'utc_offset' => 'int',
+        'is_dst' => 'bool',
+        'timestamp' => 'int',
+        'local_rfc_2822_timestamp' => 'string',
+        'local_rfc_3339_timestamp' => 'string'
     ];
 
     /**
@@ -75,13 +74,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'fill_color' => null,
-        'opacity' => 'float',
-        'fill' => null,
-        'fill_opacity' => 'float',
-        'color' => null,
-        'contour' => 'float',
-        'metric' => null
+        'tz_id' => null,
+        'utc_offset' => 'int32',
+        'is_dst' => null,
+        'timestamp' => 'int64',
+        'local_rfc_2822_timestamp' => null,
+        'local_rfc_3339_timestamp' => null
     ];
 
     /**
@@ -90,13 +88,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'fill_color' => false,
-        'opacity' => false,
-        'fill' => false,
-        'fill_opacity' => false,
-        'color' => false,
-        'contour' => false,
-        'metric' => false
+        'tz_id' => false,
+        'utc_offset' => false,
+        'is_dst' => false,
+        'timestamp' => false,
+        'local_rfc_2822_timestamp' => true,
+        'local_rfc_3339_timestamp' => false
     ];
 
     /**
@@ -185,13 +182,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'fill_color' => 'fillColor',
-        'opacity' => 'opacity',
-        'fill' => 'fill',
-        'fill_opacity' => 'fillOpacity',
-        'color' => 'color',
-        'contour' => 'contour',
-        'metric' => 'metric'
+        'tz_id' => 'tz_id',
+        'utc_offset' => 'utc_offset',
+        'is_dst' => 'is_dst',
+        'timestamp' => 'timestamp',
+        'local_rfc_2822_timestamp' => 'local_rfc_2822_timestamp',
+        'local_rfc_3339_timestamp' => 'local_rfc_3339_timestamp'
     ];
 
     /**
@@ -200,13 +196,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'fill_color' => 'setFillColor',
-        'opacity' => 'setOpacity',
-        'fill' => 'setFill',
-        'fill_opacity' => 'setFillOpacity',
-        'color' => 'setColor',
-        'contour' => 'setContour',
-        'metric' => 'setMetric'
+        'tz_id' => 'setTzId',
+        'utc_offset' => 'setUtcOffset',
+        'is_dst' => 'setIsDst',
+        'timestamp' => 'setTimestamp',
+        'local_rfc_2822_timestamp' => 'setLocalRfc2822Timestamp',
+        'local_rfc_3339_timestamp' => 'setLocalRfc3339Timestamp'
     ];
 
     /**
@@ -215,13 +210,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'fill_color' => 'getFillColor',
-        'opacity' => 'getOpacity',
-        'fill' => 'getFill',
-        'fill_opacity' => 'getFillOpacity',
-        'color' => 'getColor',
-        'contour' => 'getContour',
-        'metric' => 'getMetric'
+        'tz_id' => 'getTzId',
+        'utc_offset' => 'getUtcOffset',
+        'is_dst' => 'getIsDst',
+        'timestamp' => 'getTimestamp',
+        'local_rfc_2822_timestamp' => 'getLocalRfc2822Timestamp',
+        'local_rfc_3339_timestamp' => 'getLocalRfc3339Timestamp'
     ];
 
     /**
@@ -265,21 +259,6 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
-    public const METRIC_TIME = 'time';
-    public const METRIC_DISTANCE = 'distance';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMetricAllowableValues()
-    {
-        return [
-            self::METRIC_TIME,
-            self::METRIC_DISTANCE,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -296,13 +275,12 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('fill_color', $data ?? [], null);
-        $this->setIfExists('opacity', $data ?? [], null);
-        $this->setIfExists('fill', $data ?? [], null);
-        $this->setIfExists('fill_opacity', $data ?? [], null);
-        $this->setIfExists('color', $data ?? [], null);
-        $this->setIfExists('contour', $data ?? [], null);
-        $this->setIfExists('metric', $data ?? [], null);
+        $this->setIfExists('tz_id', $data ?? [], null);
+        $this->setIfExists('utc_offset', $data ?? [], null);
+        $this->setIfExists('is_dst', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('local_rfc_2822_timestamp', $data ?? [], null);
+        $this->setIfExists('local_rfc_3339_timestamp', $data ?? [], null);
     }
 
     /**
@@ -332,15 +310,21 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!is_null($this->container['metric']) && !in_array($this->container['metric'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'metric', must be one of '%s'",
-                $this->container['metric'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['tz_id'] === null) {
+            $invalidProperties[] = "'tz_id' can't be null";
         }
-
+        if ($this->container['utc_offset'] === null) {
+            $invalidProperties[] = "'utc_offset' can't be null";
+        }
+        if ($this->container['is_dst'] === null) {
+            $invalidProperties[] = "'is_dst' can't be null";
+        }
+        if ($this->container['timestamp'] === null) {
+            $invalidProperties[] = "'timestamp' can't be null";
+        }
+        if ($this->container['local_rfc_3339_timestamp'] === null) {
+            $invalidProperties[] = "'local_rfc_3339_timestamp' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -357,200 +341,170 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets fill_color
+     * Gets tz_id
+     *
+     * @return string
+     */
+    public function getTzId()
+    {
+        return $this->container['tz_id'];
+    }
+
+    /**
+     * Sets tz_id
+     *
+     * @param string $tz_id The canonical time zone ID.  In the event that multiple time zones could be returned, the first one from the Unicode CLDR timezone.xml is returned.
+     *
+     * @return self
+     */
+    public function setTzId($tz_id)
+    {
+        if (is_null($tz_id)) {
+            throw new \InvalidArgumentException('non-nullable tz_id cannot be null');
+        }
+        $this->container['tz_id'] = $tz_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets utc_offset
+     *
+     * @return int
+     */
+    public function getUtcOffset()
+    {
+        return $this->container['utc_offset'];
+    }
+
+    /**
+     * Sets utc_offset
+     *
+     * @param int $utc_offset The total offset, in seconds, from UTC that is currently in effect for this time zone.  This accounts for both the standard offset and any seasonal adjustments (e.g. DST).
+     *
+     * @return self
+     */
+    public function setUtcOffset($utc_offset)
+    {
+        if (is_null($utc_offset)) {
+            throw new \InvalidArgumentException('non-nullable utc_offset cannot be null');
+        }
+        $this->container['utc_offset'] = $utc_offset;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_dst
+     *
+     * @return bool
+     */
+    public function getIsDst()
+    {
+        return $this->container['is_dst'];
+    }
+
+    /**
+     * Sets is_dst
+     *
+     * @param bool $is_dst Whether Daylight Saving Time (or a similar seasonal offset) is in effect at the queried timestamp.
+     *
+     * @return self
+     */
+    public function setIsDst($is_dst)
+    {
+        if (is_null($is_dst)) {
+            throw new \InvalidArgumentException('non-nullable is_dst cannot be null');
+        }
+        $this->container['is_dst'] = $is_dst;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp
+     *
+     * @return int
+     */
+    public function getTimestamp()
+    {
+        return $this->container['timestamp'];
+    }
+
+    /**
+     * Sets timestamp
+     *
+     * @param int $timestamp Integer non-leap seconds since January 1, 1970 (UNIX timestamp).  If present, offsets will be calculated as of this time. Otherwise, offsets will be effective as of the time of the query.
+     *
+     * @return self
+     */
+    public function setTimestamp($timestamp)
+    {
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        }
+        $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets local_rfc_2822_timestamp
      *
      * @return string|null
      */
-    public function getFillColor()
+    public function getLocalRfc2822Timestamp()
     {
-        return $this->container['fill_color'];
+        return $this->container['local_rfc_2822_timestamp'];
     }
 
     /**
-     * Sets fill_color
+     * Sets local_rfc_2822_timestamp
      *
-     * @param string|null $fill_color fill_color
+     * @param string|null $local_rfc_2822_timestamp The local time expressed as an RFC 2822 timestamp (e.g. Tue, 1 Jun 2003 10:52:37 -0500).  If a timestamp is included in the request, it will be localized here. Otherwise, this will reflect the time of the request.  NOTE: RFC 2822 is more restrictive than other formats and cannot represent all dates.
      *
      * @return self
      */
-    public function setFillColor($fill_color)
+    public function setLocalRfc2822Timestamp($local_rfc_2822_timestamp)
     {
-        if (is_null($fill_color)) {
-            throw new \InvalidArgumentException('non-nullable fill_color cannot be null');
+        if (is_null($local_rfc_2822_timestamp)) {
+            array_push($this->openAPINullablesSetToNull, 'local_rfc_2822_timestamp');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('local_rfc_2822_timestamp', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['fill_color'] = $fill_color;
+        $this->container['local_rfc_2822_timestamp'] = $local_rfc_2822_timestamp;
 
         return $this;
     }
 
     /**
-     * Gets opacity
+     * Gets local_rfc_3339_timestamp
      *
-     * @return float|null
+     * @return string
      */
-    public function getOpacity()
+    public function getLocalRfc3339Timestamp()
     {
-        return $this->container['opacity'];
+        return $this->container['local_rfc_3339_timestamp'];
     }
 
     /**
-     * Sets opacity
+     * Sets local_rfc_3339_timestamp
      *
-     * @param float|null $opacity opacity
+     * @param string $local_rfc_3339_timestamp The local time expressed as an RFC 3339 (ISO 8601) timestamp (e.g. 2003-06-01T10:52:37+02:00).  If a timestamp is included in the request, it will be localized here. Otherwise, this will reflect the time of the request.
      *
      * @return self
      */
-    public function setOpacity($opacity)
+    public function setLocalRfc3339Timestamp($local_rfc_3339_timestamp)
     {
-        if (is_null($opacity)) {
-            throw new \InvalidArgumentException('non-nullable opacity cannot be null');
+        if (is_null($local_rfc_3339_timestamp)) {
+            throw new \InvalidArgumentException('non-nullable local_rfc_3339_timestamp cannot be null');
         }
-        $this->container['opacity'] = $opacity;
-
-        return $this;
-    }
-
-    /**
-     * Gets fill
-     *
-     * @return string|null
-     */
-    public function getFill()
-    {
-        return $this->container['fill'];
-    }
-
-    /**
-     * Sets fill
-     *
-     * @param string|null $fill fill
-     *
-     * @return self
-     */
-    public function setFill($fill)
-    {
-        if (is_null($fill)) {
-            throw new \InvalidArgumentException('non-nullable fill cannot be null');
-        }
-        $this->container['fill'] = $fill;
-
-        return $this;
-    }
-
-    /**
-     * Gets fill_opacity
-     *
-     * @return float|null
-     */
-    public function getFillOpacity()
-    {
-        return $this->container['fill_opacity'];
-    }
-
-    /**
-     * Sets fill_opacity
-     *
-     * @param float|null $fill_opacity fill_opacity
-     *
-     * @return self
-     */
-    public function setFillOpacity($fill_opacity)
-    {
-        if (is_null($fill_opacity)) {
-            throw new \InvalidArgumentException('non-nullable fill_opacity cannot be null');
-        }
-        $this->container['fill_opacity'] = $fill_opacity;
-
-        return $this;
-    }
-
-    /**
-     * Gets color
-     *
-     * @return string|null
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param string|null $color color
-     *
-     * @return self
-     */
-    public function setColor($color)
-    {
-        if (is_null($color)) {
-            throw new \InvalidArgumentException('non-nullable color cannot be null');
-        }
-        $this->container['color'] = $color;
-
-        return $this;
-    }
-
-    /**
-     * Gets contour
-     *
-     * @return float|null
-     */
-    public function getContour()
-    {
-        return $this->container['contour'];
-    }
-
-    /**
-     * Sets contour
-     *
-     * @param float|null $contour contour
-     *
-     * @return self
-     */
-    public function setContour($contour)
-    {
-        if (is_null($contour)) {
-            throw new \InvalidArgumentException('non-nullable contour cannot be null');
-        }
-        $this->container['contour'] = $contour;
-
-        return $this;
-    }
-
-    /**
-     * Gets metric
-     *
-     * @return string|null
-     */
-    public function getMetric()
-    {
-        return $this->container['metric'];
-    }
-
-    /**
-     * Sets metric
-     *
-     * @param string|null $metric metric
-     *
-     * @return self
-     */
-    public function setMetric($metric)
-    {
-        if (is_null($metric)) {
-            throw new \InvalidArgumentException('non-nullable metric cannot be null');
-        }
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!in_array($metric, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'metric', must be one of '%s'",
-                    $metric,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['metric'] = $metric;
+        $this->container['local_rfc_3339_timestamp'] = $local_rfc_3339_timestamp;
 
         return $this;
     }

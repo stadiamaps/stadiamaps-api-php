@@ -14,5 +14,11 @@ composer.lock
 # PHPUnit cache
 .phpunit.result.cache
 
+# PHPStorm
 .idea/
+
+# Silly script that the openapi generator creates
 git_push.sh
+
+# phpactor config
+.phpactor.json

@@ -16,7 +16,7 @@ Integration tests require a Stadia Maps API key.
 They are run automatically by CI.
 
 ```bash
-export API_KEY=YOUR-API-KEY
+export STADIA_API_KEY=YOUR-API-KEY
 composer install
 vendor/bin/phpunit
 ```

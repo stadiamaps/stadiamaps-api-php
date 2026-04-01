@@ -1,6 +1,6 @@
 <?php
 /**
- * IsochroneProperties
+ * ReverseQuery
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * IsochroneProperties Class Doc Comment
+ * ReverseQuery Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class ReverseQuery implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'isochroneProperties';
+    protected static $openAPIModelName = 'reverseQuery';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +58,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'fill_color' => 'string',
-        'opacity' => 'float',
-        'fill' => 'string',
-        'fill_opacity' => 'float',
-        'color' => 'string',
-        'contour' => 'float',
-        'metric' => 'string'
+        'point_lat' => 'float',
+        'point_lon' => 'float',
+        'boundary_circle_radius' => 'float',
+        'boundary_country' => 'string[]',
+        'boundary_gid' => 'string',
+        'layers' => '\OpenAPI\Client\Model\GeocodingLayer[]',
+        'sources' => '\OpenAPI\Client\Model\GeocodingSource[]',
+        'size' => 'int',
+        'lang' => 'string'
     ];
 
     /**
@@ -75,13 +77,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'fill_color' => null,
-        'opacity' => 'float',
-        'fill' => null,
-        'fill_opacity' => 'float',
-        'color' => null,
-        'contour' => 'float',
-        'metric' => null
+        'point_lat' => 'double',
+        'point_lon' => 'double',
+        'boundary_circle_radius' => 'double',
+        'boundary_country' => null,
+        'boundary_gid' => null,
+        'layers' => null,
+        'sources' => null,
+        'size' => null,
+        'lang' => null
     ];
 
     /**
@@ -90,13 +94,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'fill_color' => false,
-        'opacity' => false,
-        'fill' => false,
-        'fill_opacity' => false,
-        'color' => false,
-        'contour' => false,
-        'metric' => false
+        'point_lat' => false,
+        'point_lon' => false,
+        'boundary_circle_radius' => false,
+        'boundary_country' => false,
+        'boundary_gid' => false,
+        'layers' => false,
+        'sources' => false,
+        'size' => false,
+        'lang' => false
     ];
 
     /**
@@ -185,13 +191,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'fill_color' => 'fillColor',
-        'opacity' => 'opacity',
-        'fill' => 'fill',
-        'fill_opacity' => 'fillOpacity',
-        'color' => 'color',
-        'contour' => 'contour',
-        'metric' => 'metric'
+        'point_lat' => 'point.lat',
+        'point_lon' => 'point.lon',
+        'boundary_circle_radius' => 'boundary.circle.radius',
+        'boundary_country' => 'boundary.country',
+        'boundary_gid' => 'boundary.gid',
+        'layers' => 'layers',
+        'sources' => 'sources',
+        'size' => 'size',
+        'lang' => 'lang'
     ];
 
     /**
@@ -200,13 +208,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'fill_color' => 'setFillColor',
-        'opacity' => 'setOpacity',
-        'fill' => 'setFill',
-        'fill_opacity' => 'setFillOpacity',
-        'color' => 'setColor',
-        'contour' => 'setContour',
-        'metric' => 'setMetric'
+        'point_lat' => 'setPointLat',
+        'point_lon' => 'setPointLon',
+        'boundary_circle_radius' => 'setBoundaryCircleRadius',
+        'boundary_country' => 'setBoundaryCountry',
+        'boundary_gid' => 'setBoundaryGid',
+        'layers' => 'setLayers',
+        'sources' => 'setSources',
+        'size' => 'setSize',
+        'lang' => 'setLang'
     ];
 
     /**
@@ -215,13 +225,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'fill_color' => 'getFillColor',
-        'opacity' => 'getOpacity',
-        'fill' => 'getFill',
-        'fill_opacity' => 'getFillOpacity',
-        'color' => 'getColor',
-        'contour' => 'getContour',
-        'metric' => 'getMetric'
+        'point_lat' => 'getPointLat',
+        'point_lon' => 'getPointLon',
+        'boundary_circle_radius' => 'getBoundaryCircleRadius',
+        'boundary_country' => 'getBoundaryCountry',
+        'boundary_gid' => 'getBoundaryGid',
+        'layers' => 'getLayers',
+        'sources' => 'getSources',
+        'size' => 'getSize',
+        'lang' => 'getLang'
     ];
 
     /**
@@ -265,21 +277,6 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
-    public const METRIC_TIME = 'time';
-    public const METRIC_DISTANCE = 'distance';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getMetricAllowableValues()
-    {
-        return [
-            self::METRIC_TIME,
-            self::METRIC_DISTANCE,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -296,13 +293,15 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('fill_color', $data ?? [], null);
-        $this->setIfExists('opacity', $data ?? [], null);
-        $this->setIfExists('fill', $data ?? [], null);
-        $this->setIfExists('fill_opacity', $data ?? [], null);
-        $this->setIfExists('color', $data ?? [], null);
-        $this->setIfExists('contour', $data ?? [], null);
-        $this->setIfExists('metric', $data ?? [], null);
+        $this->setIfExists('point_lat', $data ?? [], null);
+        $this->setIfExists('point_lon', $data ?? [], null);
+        $this->setIfExists('boundary_circle_radius', $data ?? [], null);
+        $this->setIfExists('boundary_country', $data ?? [], null);
+        $this->setIfExists('boundary_gid', $data ?? [], null);
+        $this->setIfExists('layers', $data ?? [], null);
+        $this->setIfExists('sources', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
+        $this->setIfExists('lang', $data ?? [], null);
     }
 
     /**
@@ -332,13 +331,20 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!is_null($this->container['metric']) && !in_array($this->container['metric'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'metric', must be one of '%s'",
-                $this->container['metric'],
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['point_lat']) && ($this->container['point_lat'] > 90)) {
+            $invalidProperties[] = "invalid value for 'point_lat', must be smaller than or equal to 90.";
+        }
+
+        if (!is_null($this->container['point_lat']) && ($this->container['point_lat'] < -90)) {
+            $invalidProperties[] = "invalid value for 'point_lat', must be bigger than or equal to -90.";
+        }
+
+        if (!is_null($this->container['point_lon']) && ($this->container['point_lon'] > 180)) {
+            $invalidProperties[] = "invalid value for 'point_lon', must be smaller than or equal to 180.";
+        }
+
+        if (!is_null($this->container['point_lon']) && ($this->container['point_lon'] < -180)) {
+            $invalidProperties[] = "invalid value for 'point_lon', must be bigger than or equal to -180.";
         }
 
         return $invalidProperties;
@@ -357,200 +363,260 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets fill_color
-     *
-     * @return string|null
-     */
-    public function getFillColor()
-    {
-        return $this->container['fill_color'];
-    }
-
-    /**
-     * Sets fill_color
-     *
-     * @param string|null $fill_color fill_color
-     *
-     * @return self
-     */
-    public function setFillColor($fill_color)
-    {
-        if (is_null($fill_color)) {
-            throw new \InvalidArgumentException('non-nullable fill_color cannot be null');
-        }
-        $this->container['fill_color'] = $fill_color;
-
-        return $this;
-    }
-
-    /**
-     * Gets opacity
+     * Gets point_lat
      *
      * @return float|null
      */
-    public function getOpacity()
+    public function getPointLat()
     {
-        return $this->container['opacity'];
+        return $this->container['point_lat'];
     }
 
     /**
-     * Sets opacity
+     * Sets point_lat
      *
-     * @param float|null $opacity opacity
+     * @param float|null $point_lat The latitude of the point at which to perform the search.
      *
      * @return self
      */
-    public function setOpacity($opacity)
+    public function setPointLat($point_lat)
     {
-        if (is_null($opacity)) {
-            throw new \InvalidArgumentException('non-nullable opacity cannot be null');
+        if (is_null($point_lat)) {
+            throw new \InvalidArgumentException('non-nullable point_lat cannot be null');
         }
-        $this->container['opacity'] = $opacity;
+
+        if (($point_lat > 90)) {
+            throw new \InvalidArgumentException('invalid value for $point_lat when calling ReverseQuery., must be smaller than or equal to 90.');
+        }
+        if (($point_lat < -90)) {
+            throw new \InvalidArgumentException('invalid value for $point_lat when calling ReverseQuery., must be bigger than or equal to -90.');
+        }
+
+        $this->container['point_lat'] = $point_lat;
 
         return $this;
     }
 
     /**
-     * Gets fill
-     *
-     * @return string|null
-     */
-    public function getFill()
-    {
-        return $this->container['fill'];
-    }
-
-    /**
-     * Sets fill
-     *
-     * @param string|null $fill fill
-     *
-     * @return self
-     */
-    public function setFill($fill)
-    {
-        if (is_null($fill)) {
-            throw new \InvalidArgumentException('non-nullable fill cannot be null');
-        }
-        $this->container['fill'] = $fill;
-
-        return $this;
-    }
-
-    /**
-     * Gets fill_opacity
+     * Gets point_lon
      *
      * @return float|null
      */
-    public function getFillOpacity()
+    public function getPointLon()
     {
-        return $this->container['fill_opacity'];
+        return $this->container['point_lon'];
     }
 
     /**
-     * Sets fill_opacity
+     * Sets point_lon
      *
-     * @param float|null $fill_opacity fill_opacity
+     * @param float|null $point_lon The longitude of the point at which to perform the search.
      *
      * @return self
      */
-    public function setFillOpacity($fill_opacity)
+    public function setPointLon($point_lon)
     {
-        if (is_null($fill_opacity)) {
-            throw new \InvalidArgumentException('non-nullable fill_opacity cannot be null');
+        if (is_null($point_lon)) {
+            throw new \InvalidArgumentException('non-nullable point_lon cannot be null');
         }
-        $this->container['fill_opacity'] = $fill_opacity;
+
+        if (($point_lon > 180)) {
+            throw new \InvalidArgumentException('invalid value for $point_lon when calling ReverseQuery., must be smaller than or equal to 180.');
+        }
+        if (($point_lon < -180)) {
+            throw new \InvalidArgumentException('invalid value for $point_lon when calling ReverseQuery., must be bigger than or equal to -180.');
+        }
+
+        $this->container['point_lon'] = $point_lon;
 
         return $this;
     }
 
     /**
-     * Gets color
-     *
-     * @return string|null
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param string|null $color color
-     *
-     * @return self
-     */
-    public function setColor($color)
-    {
-        if (is_null($color)) {
-            throw new \InvalidArgumentException('non-nullable color cannot be null');
-        }
-        $this->container['color'] = $color;
-
-        return $this;
-    }
-
-    /**
-     * Gets contour
+     * Gets boundary_circle_radius
      *
      * @return float|null
      */
-    public function getContour()
+    public function getBoundaryCircleRadius()
     {
-        return $this->container['contour'];
+        return $this->container['boundary_circle_radius'];
     }
 
     /**
-     * Sets contour
+     * Sets boundary_circle_radius
      *
-     * @param float|null $contour contour
+     * @param float|null $boundary_circle_radius The radius of the circle (in kilometers) to limit the search to. Defaults to 50km if unspecified.
      *
      * @return self
      */
-    public function setContour($contour)
+    public function setBoundaryCircleRadius($boundary_circle_radius)
     {
-        if (is_null($contour)) {
-            throw new \InvalidArgumentException('non-nullable contour cannot be null');
+        if (is_null($boundary_circle_radius)) {
+            throw new \InvalidArgumentException('non-nullable boundary_circle_radius cannot be null');
         }
-        $this->container['contour'] = $contour;
+        $this->container['boundary_circle_radius'] = $boundary_circle_radius;
 
         return $this;
     }
 
     /**
-     * Gets metric
+     * Gets boundary_country
      *
-     * @return string|null
+     * @return string[]|null
      */
-    public function getMetric()
+    public function getBoundaryCountry()
     {
-        return $this->container['metric'];
+        return $this->container['boundary_country'];
     }
 
     /**
-     * Sets metric
+     * Sets boundary_country
      *
-     * @param string|null $metric metric
+     * @param string[]|null $boundary_country A list of country codes in ISO 3116-1 alpha-2 or alpha-3 format.
      *
      * @return self
      */
-    public function setMetric($metric)
+    public function setBoundaryCountry($boundary_country)
     {
-        if (is_null($metric)) {
-            throw new \InvalidArgumentException('non-nullable metric cannot be null');
+        if (is_null($boundary_country)) {
+            throw new \InvalidArgumentException('non-nullable boundary_country cannot be null');
         }
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!in_array($metric, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'metric', must be one of '%s'",
-                    $metric,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['boundary_country'] = $boundary_country;
+
+        return $this;
+    }
+
+    /**
+     * Gets boundary_gid
+     *
+     * @return string|null
+     */
+    public function getBoundaryGid()
+    {
+        return $this->container['boundary_gid'];
+    }
+
+    /**
+     * Sets boundary_gid
+     *
+     * @param string|null $boundary_gid The GID of an area to limit the search to.
+     *
+     * @return self
+     */
+    public function setBoundaryGid($boundary_gid)
+    {
+        if (is_null($boundary_gid)) {
+            throw new \InvalidArgumentException('non-nullable boundary_gid cannot be null');
         }
-        $this->container['metric'] = $metric;
+        $this->container['boundary_gid'] = $boundary_gid;
+
+        return $this;
+    }
+
+    /**
+     * Gets layers
+     *
+     * @return \OpenAPI\Client\Model\GeocodingLayer[]|null
+     */
+    public function getLayers()
+    {
+        return $this->container['layers'];
+    }
+
+    /**
+     * Sets layers
+     *
+     * @param \OpenAPI\Client\Model\GeocodingLayer[]|null $layers A list of layers to limit the search to.
+     *
+     * @return self
+     */
+    public function setLayers($layers)
+    {
+        if (is_null($layers)) {
+            throw new \InvalidArgumentException('non-nullable layers cannot be null');
+        }
+        $this->container['layers'] = $layers;
+
+        return $this;
+    }
+
+    /**
+     * Gets sources
+     *
+     * @return \OpenAPI\Client\Model\GeocodingSource[]|null
+     */
+    public function getSources()
+    {
+        return $this->container['sources'];
+    }
+
+    /**
+     * Sets sources
+     *
+     * @param \OpenAPI\Client\Model\GeocodingSource[]|null $sources A list of sources to limit the search to.
+     *
+     * @return self
+     */
+    public function setSources($sources)
+    {
+        if (is_null($sources)) {
+            throw new \InvalidArgumentException('non-nullable sources cannot be null');
+        }
+        $this->container['sources'] = $sources;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int|null $size The maximum number of results to return.
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        if (is_null($size)) {
+            throw new \InvalidArgumentException('non-nullable size cannot be null');
+        }
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets lang
+     *
+     * @return string|null
+     */
+    public function getLang()
+    {
+        return $this->container['lang'];
+    }
+
+    /**
+     * Sets lang
+     *
+     * @param string|null $lang A BCP47 language tag which specifies a preference for localization of results. By default, results are in the default locale of the source data, but specifying a language will attempt to localize the results. Note that while a `langtag` (in RFC 5646 terms) can contain script, region, etc., only the `language` portion, an ISO 639 code, will be considered. So `en-US` and `en-GB` will both be treated as English.
+     *
+     * @return self
+     */
+    public function setLang($lang)
+    {
+        if (is_null($lang)) {
+            throw new \InvalidArgumentException('non-nullable lang cannot be null');
+        }
+        $this->container['lang'] = $lang;
 
         return $this;
     }

@@ -115,6 +115,7 @@ lib/Model/Point.php
 lib/Model/Precision.php
 lib/Model/PropertiesV2.php
 lib/Model/Restrictions.php
+lib/Model/ReverseQuery.php
 lib/Model/RoadClass.php
 lib/Model/Route200Response.php
 lib/Model/RouteLeg.php
@@ -131,10 +132,12 @@ lib/Model/RoutingWaypoint.php
 lib/Model/RoutingWaypointAllOfSearchFilter.php
 lib/Model/SearchQuery.php
 lib/Model/SearchStructuredQuery.php
+lib/Model/ShapeFormat.php
 lib/Model/SimpleRoutingWaypoint.php
 lib/Model/SourceAttribution.php
 lib/Model/SourceId.php
 lib/Model/Speeds.php
+lib/Model/TimeConstraintV1.php
 lib/Model/TraceAttributeFilterOptions.php
 lib/Model/TraceAttributeKey.php
 lib/Model/TraceAttributesBaseResponse.php
@@ -145,6 +148,7 @@ lib/Model/TravelMode.php
 lib/Model/Traversability.php
 lib/Model/TruckCostingOptions.php
 lib/Model/TzResponse.php
+lib/Model/TzResponseV2.php
 lib/Model/Warning.php
 lib/Model/WhosOnFirstConcordances.php
 lib/Model/WofContext.php

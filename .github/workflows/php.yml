@@ -26,4 +26,4 @@ jobs:
     - name: Run test suite
       run: composer run-script test
       env:
-        API_KEY: ${{ secrets.API_KEY }}
+        STADIA_API_KEY: ${{ secrets.API_KEY }}

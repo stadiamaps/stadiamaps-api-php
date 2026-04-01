@@ -1,6 +1,6 @@
 <?php
 /**
- * TravelMode
+ * ShapeFormat
  *
  * PHP version 8.1
  *
@@ -31,25 +31,22 @@ namespace OpenAPI\Client\Model;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * TravelMode Class Doc Comment
+ * ShapeFormat Class Doc Comment
  *
  * @category Class
+ * @description Specifies the precision of an encoded polyline.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class TravelMode
+class ShapeFormat
 {
     /**
      * Possible values of this enum
      */
-    public const DRIVE = 'drive';
+    public const POLYLINE6 = 'polyline6';
 
-    public const PEDESTRIAN = 'pedestrian';
-
-    public const BICYCLE = 'bicycle';
-
-    public const TRANSIT = 'transit';
+    public const POLYLINE5 = 'polyline5';
 
     /**
      * Gets allowable values of the enum
@@ -58,10 +55,8 @@ class TravelMode
     public static function getAllowableEnumValues()
     {
         return [
-            self::DRIVE,
-            self::PEDESTRIAN,
-            self::BICYCLE,
-            self::TRANSIT
+            self::POLYLINE6,
+            self::POLYLINE5
         ];
     }
 }

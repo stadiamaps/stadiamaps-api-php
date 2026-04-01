@@ -1,6 +1,6 @@
 <?php
 /**
- * IsochroneProperties
+ * TimeConstraintV1
  *
  * PHP version 8.1
  *
@@ -33,15 +33,16 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * IsochroneProperties Class Doc Comment
+ * TimeConstraintV1 Class Doc Comment
  *
  * @category Class
+ * @description Specifies the time context for time-dependent routing (e.g., to account for traffic patterns or time-based access restrictions). Defaults \&quot;now\&quot; for traffic-influenced routing profiles like &#x60;auto_traffic&#x60;.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializable
+class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +51,7 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'isochroneProperties';
+    protected static $openAPIModelName = 'timeConstraintV1';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +59,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'fill_color' => 'string',
-        'opacity' => 'float',
-        'fill' => 'string',
-        'fill_opacity' => 'float',
-        'color' => 'string',
-        'contour' => 'float',
-        'metric' => 'string'
+        'type' => 'int',
+        'value' => 'string'
     ];
 
     /**
@@ -75,13 +71,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'fill_color' => null,
-        'opacity' => 'float',
-        'fill' => null,
-        'fill_opacity' => 'float',
-        'color' => null,
-        'contour' => 'float',
-        'metric' => null
+        'type' => null,
+        'value' => null
     ];
 
     /**
@@ -90,13 +81,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'fill_color' => false,
-        'opacity' => false,
-        'fill' => false,
-        'fill_opacity' => false,
-        'color' => false,
-        'contour' => false,
-        'metric' => false
+        'type' => false,
+        'value' => false
     ];
 
     /**
@@ -185,13 +171,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'fill_color' => 'fillColor',
-        'opacity' => 'opacity',
-        'fill' => 'fill',
-        'fill_opacity' => 'fillOpacity',
-        'color' => 'color',
-        'contour' => 'contour',
-        'metric' => 'metric'
+        'type' => 'type',
+        'value' => 'value'
     ];
 
     /**
@@ -200,13 +181,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'fill_color' => 'setFillColor',
-        'opacity' => 'setOpacity',
-        'fill' => 'setFill',
-        'fill_opacity' => 'setFillOpacity',
-        'color' => 'setColor',
-        'contour' => 'setContour',
-        'metric' => 'setMetric'
+        'type' => 'setType',
+        'value' => 'setValue'
     ];
 
     /**
@@ -215,13 +191,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'fill_color' => 'getFillColor',
-        'opacity' => 'getOpacity',
-        'fill' => 'getFill',
-        'fill_opacity' => 'getFillOpacity',
-        'color' => 'getColor',
-        'contour' => 'getContour',
-        'metric' => 'getMetric'
+        'type' => 'getType',
+        'value' => 'getValue'
     ];
 
     /**
@@ -265,19 +236,21 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
-    public const METRIC_TIME = 'time';
-    public const METRIC_DISTANCE = 'distance';
+    public const TYPE_NUMBER_0 = 0;
+    public const TYPE_NUMBER_1 = 1;
+    public const TYPE_NUMBER_2 = 2;
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getMetricAllowableValues()
+    public function getTypeAllowableValues()
     {
         return [
-            self::METRIC_TIME,
-            self::METRIC_DISTANCE,
+            self::TYPE_NUMBER_0,
+            self::TYPE_NUMBER_1,
+            self::TYPE_NUMBER_2,
         ];
     }
 
@@ -296,13 +269,8 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('fill_color', $data ?? [], null);
-        $this->setIfExists('opacity', $data ?? [], null);
-        $this->setIfExists('fill', $data ?? [], null);
-        $this->setIfExists('fill_opacity', $data ?? [], null);
-        $this->setIfExists('color', $data ?? [], null);
-        $this->setIfExists('contour', $data ?? [], null);
-        $this->setIfExists('metric', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
     }
 
     /**
@@ -332,11 +300,14 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!is_null($this->container['metric']) && !in_array($this->container['metric'], $allowedValues, true)) {
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'metric', must be one of '%s'",
-                $this->container['metric'],
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
                 implode("', '", $allowedValues)
             );
         }
@@ -357,200 +328,65 @@ class IsochroneProperties implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets fill_color
+     * Gets type
      *
-     * @return string|null
+     * @return int
      */
-    public function getFillColor()
+    public function getType()
     {
-        return $this->container['fill_color'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets fill_color
+     * Sets type
      *
-     * @param string|null $fill_color fill_color
+     * @param int $type The type of time constraint: 0 = current time (depart now), 1 = depart at the specified time, 2 = arrive by the specified time.
      *
      * @return self
      */
-    public function setFillColor($fill_color)
+    public function setType($type)
     {
-        if (is_null($fill_color)) {
-            throw new \InvalidArgumentException('non-nullable fill_color cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['fill_color'] = $fill_color;
-
-        return $this;
-    }
-
-    /**
-     * Gets opacity
-     *
-     * @return float|null
-     */
-    public function getOpacity()
-    {
-        return $this->container['opacity'];
-    }
-
-    /**
-     * Sets opacity
-     *
-     * @param float|null $opacity opacity
-     *
-     * @return self
-     */
-    public function setOpacity($opacity)
-    {
-        if (is_null($opacity)) {
-            throw new \InvalidArgumentException('non-nullable opacity cannot be null');
-        }
-        $this->container['opacity'] = $opacity;
-
-        return $this;
-    }
-
-    /**
-     * Gets fill
-     *
-     * @return string|null
-     */
-    public function getFill()
-    {
-        return $this->container['fill'];
-    }
-
-    /**
-     * Sets fill
-     *
-     * @param string|null $fill fill
-     *
-     * @return self
-     */
-    public function setFill($fill)
-    {
-        if (is_null($fill)) {
-            throw new \InvalidArgumentException('non-nullable fill cannot be null');
-        }
-        $this->container['fill'] = $fill;
-
-        return $this;
-    }
-
-    /**
-     * Gets fill_opacity
-     *
-     * @return float|null
-     */
-    public function getFillOpacity()
-    {
-        return $this->container['fill_opacity'];
-    }
-
-    /**
-     * Sets fill_opacity
-     *
-     * @param float|null $fill_opacity fill_opacity
-     *
-     * @return self
-     */
-    public function setFillOpacity($fill_opacity)
-    {
-        if (is_null($fill_opacity)) {
-            throw new \InvalidArgumentException('non-nullable fill_opacity cannot be null');
-        }
-        $this->container['fill_opacity'] = $fill_opacity;
-
-        return $this;
-    }
-
-    /**
-     * Gets color
-     *
-     * @return string|null
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param string|null $color color
-     *
-     * @return self
-     */
-    public function setColor($color)
-    {
-        if (is_null($color)) {
-            throw new \InvalidArgumentException('non-nullable color cannot be null');
-        }
-        $this->container['color'] = $color;
-
-        return $this;
-    }
-
-    /**
-     * Gets contour
-     *
-     * @return float|null
-     */
-    public function getContour()
-    {
-        return $this->container['contour'];
-    }
-
-    /**
-     * Sets contour
-     *
-     * @param float|null $contour contour
-     *
-     * @return self
-     */
-    public function setContour($contour)
-    {
-        if (is_null($contour)) {
-            throw new \InvalidArgumentException('non-nullable contour cannot be null');
-        }
-        $this->container['contour'] = $contour;
-
-        return $this;
-    }
-
-    /**
-     * Gets metric
-     *
-     * @return string|null
-     */
-    public function getMetric()
-    {
-        return $this->container['metric'];
-    }
-
-    /**
-     * Sets metric
-     *
-     * @param string|null $metric metric
-     *
-     * @return self
-     */
-    public function setMetric($metric)
-    {
-        if (is_null($metric)) {
-            throw new \InvalidArgumentException('non-nullable metric cannot be null');
-        }
-        $allowedValues = $this->getMetricAllowableValues();
-        if (!in_array($metric, $allowedValues, true)) {
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'metric', must be one of '%s'",
-                    $metric,
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['metric'] = $metric;
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets value
+     *
+     * @return string|null
+     */
+    public function getValue()
+    {
+        return $this->container['value'];
+    }
+
+    /**
+     * Sets value
+     *
+     * @param string|null $value The date and time in `YYYY-MM-DDTHH:MM` format (seconds are accepted, but will be ignored). The date and time are local (civil) time as observed at the location. Required for types 1 and 2. Must not be provided for type 0.
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        if (is_null($value)) {
+            throw new \InvalidArgumentException('non-nullable value cannot be null');
+        }
+        $this->container['value'] = $value;
 
         return $this;
     }
