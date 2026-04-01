@@ -31,6 +31,7 @@ use OpenAPI\Client\Model\OptimizedRouteRequest;
 use OpenAPI\Client\Model\RouteRequest;
 use OpenAPI\Client\Model\RoutingLongUnits;
 use OpenAPI\Client\Model\RoutingWaypoint;
+use OpenAPI\Client\Model\TimeConstraintV1;
 use OpenAPI\Client\Model\TraceAttributesRequest;
 use PHPUnit\Framework\TestCase;
 
@@ -61,7 +62,7 @@ class RoutingApiTest extends TestCase
      */
     public function setUp(): void
     {
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('API_KEY'));
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('STADIA_API_KEY'));
         $this->apiInstance = new RoutingApi(
             new GuzzleHttp\Client(),
             $config
@@ -152,10 +153,11 @@ class RoutingApiTest extends TestCase
         $req = (new OptimizedRouteRequest())
             ->setId('optimizedRoute')
             ->setLocations([new Coordinate($this->locationA), new Coordinate($this->locationB), new Coordinate($this->locationC), new Coordinate($this->locationA)])
-            ->setCosting(CostingModel::AUTO)
+            ->setCosting(CostingModel::AUTO_TRAFFIC)
             ->setUnits(DistanceUnit::MI)
             ->setCostingOptions((new CostingOptions())
-                ->setAuto((new AutoCostingOptions())->setUseHighways(0.3)));
+                ->setAuto((new AutoCostingOptions())->setUseHighways(0.3)))
+            ->setDateTime((new TimeConstraintV1())->setType(0));
         $result = $this->apiInstance->optimizedRoute($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());

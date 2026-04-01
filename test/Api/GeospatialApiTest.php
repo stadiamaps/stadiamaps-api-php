@@ -44,7 +44,7 @@ class GeospatialApiTest extends TestCase
      */
     public function setUp(): void
     {
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('API_KEY'));
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('STADIA_API_KEY'));
         $this->apiInstance = new GeospatialApi(
             new GuzzleHttp\Client(),
             $config
@@ -112,5 +112,20 @@ class GeospatialApiTest extends TestCase
     {
         $result = $this->apiInstance->tzLookup($this->seoul['lat'], $this->seoul['lon']);
         self::assertEquals('Asia/Seoul', $result->getTzId());
+    }
+
+    /**
+     * Test case for tzLookupV2
+     *
+     * Get the current time zone information for any point on earth (v2).
+     *
+     * @throws ApiException
+     */
+    public function testTzLookupV2()
+    {
+        $result = $this->apiInstance->tzLookupV2($this->seoul['lat'], $this->seoul['lon']);
+        self::assertEquals('Asia/Seoul', $result->getTzId());
+        self::assertNotNull($result->getUtcOffset());
+        self::assertNotNull($result->getIsDst());
     }
 }

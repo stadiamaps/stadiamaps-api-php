@@ -48,7 +48,7 @@ class GeocodingApiTest extends TestCase
      */
     public function setUp(): void
     {
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('API_KEY'));
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('STADIA_API_KEY'));
         $this->apiInstance = new GeocodingApi(
             new GuzzleHttp\Client(),
             $config

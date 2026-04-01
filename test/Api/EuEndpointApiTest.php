@@ -42,7 +42,7 @@ class EuEndpointApiTest extends TestCase
      */
     public function setUp(): void
     {
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('API_KEY'))->setHost('https://api-eu.stadiamaps.com');
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api_key', getenv('STADIA_API_KEY'))->setHost('https://api-eu.stadiamaps.com');
         $this->apiInstance = new GeocodingApi(
             new GuzzleHttp\Client(),
             $config
