@@ -36,7 +36,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * TimeConstraintV1 Class Doc Comment
  *
  * @category Class
- * @description Specifies the time context for time-dependent routing (e.g., to account for traffic patterns or time-based access restrictions). Defaults \&quot;now\&quot; for traffic-influenced routing profiles like &#x60;auto_traffic&#x60;.
+ * @description Specifies the time context for time-dependent routing (e.g., to account for traffic patterns or time-based access restrictions). Defaults to \&quot;depart_now\&quot; for traffic-influenced routing profiles like &#x60;auto_traffic&#x60;.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -59,7 +59,7 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'int',
+        'type' => 'string',
         'value' => 'string'
     ];
 
@@ -236,9 +236,9 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const TYPE_NUMBER_0 = 0;
-    public const TYPE_NUMBER_1 = 1;
-    public const TYPE_NUMBER_2 = 2;
+    public const TYPE_DEPART_NOW = 'depart_now';
+    public const TYPE_DEPART_AT = 'depart_at';
+    public const TYPE_ARRIVE_AT = 'arrive_at';
 
     /**
      * Gets allowable values of the enum
@@ -248,9 +248,9 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getTypeAllowableValues()
     {
         return [
-            self::TYPE_NUMBER_0,
-            self::TYPE_NUMBER_1,
-            self::TYPE_NUMBER_2,
+            self::TYPE_DEPART_NOW,
+            self::TYPE_DEPART_AT,
+            self::TYPE_ARRIVE_AT,
         ];
     }
 
@@ -330,7 +330,7 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets type
      *
-     * @return int
+     * @return string
      */
     public function getType()
     {
@@ -340,7 +340,7 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param int $type The type of time constraint: 0 = current time (depart now), 1 = depart at the specified time, 2 = arrive by the specified time.
+     * @param string $type The type of time constraint: \"depart_now\" = depart now (current time), \"depart_at\" = depart at the specified time, \"arrive_at\" = arrive by the specified time.
      *
      * @return self
      */
@@ -377,7 +377,7 @@ class TimeConstraintV1 implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets value
      *
-     * @param string|null $value The date and time in `YYYY-MM-DDTHH:MM` format (seconds are accepted, but will be ignored). The date and time are local (civil) time as observed at the location. Required for types 1 and 2. Must not be provided for type 0.
+     * @param string|null $value The date and time in `YYYY-MM-DDTHH:MM` format (seconds are accepted, but will be ignored). The date and time are local (civil) time as observed at the location. Required when type is depart_at or arrive_at. Must not be provided for depart_now.
      *
      * @return self
      */

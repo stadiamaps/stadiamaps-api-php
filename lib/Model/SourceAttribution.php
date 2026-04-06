@@ -357,7 +357,7 @@ class SourceAttribution implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets source
      *
-     * @param string $source The source identifier. The ID of the record as it appears in the original source.
+     * @param string $source The source identifier.
      *
      * @return self
      */
@@ -384,7 +384,7 @@ class SourceAttribution implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets source_id
      *
-     * @param string $source_id source_id
+     * @param string $source_id The ID of the record as it appears in the original source.
      *
      * @return self
      */
