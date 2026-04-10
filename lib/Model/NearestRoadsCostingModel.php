@@ -1,6 +1,6 @@
 <?php
 /**
- * ShapeFormat
+ * NearestRoadsCostingModel
  *
  * PHP version 8.1
  *
@@ -31,22 +31,38 @@ namespace OpenAPI\Client\Model;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ShapeFormat Class Doc Comment
+ * NearestRoadsCostingModel Class Doc Comment
  *
  * @category Class
- * @description Specifies the precision of an encoded polyline.
+ * @description A routing profile that determines which roads are eligible for matching (e.g. trucks probably aren&#39;t on sidewalks, so the search will snap to the nearest truck-accessible road).
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ShapeFormat
+class NearestRoadsCostingModel
 {
     /**
      * Possible values of this enum
      */
-    public const POLYLINE6 = 'polyline6';
+    public const AUTO = 'auto';
 
-    public const POLYLINE5 = 'polyline5';
+    public const BUS = 'bus';
+
+    public const TAXI = 'taxi';
+
+    public const TRUCK = 'truck';
+
+    public const BICYCLE = 'bicycle';
+
+    public const BIKESHARE = 'bikeshare';
+
+    public const MOTOR_SCOOTER = 'motor_scooter';
+
+    public const MOTORCYCLE = 'motorcycle';
+
+    public const PEDESTRIAN = 'pedestrian';
+
+    public const LOW_SPEED_VEHICLE = 'low_speed_vehicle';
 
     /**
      * Gets allowable values of the enum
@@ -55,8 +71,16 @@ class ShapeFormat
     public static function getAllowableEnumValues()
     {
         return [
-            self::POLYLINE6,
-            self::POLYLINE5
+            self::AUTO,
+            self::BUS,
+            self::TAXI,
+            self::TRUCK,
+            self::BICYCLE,
+            self::BIKESHARE,
+            self::MOTOR_SCOOTER,
+            self::MOTORCYCLE,
+            self::PEDESTRIAN,
+            self::LOW_SPEED_VEHICLE
         ];
     }
 }

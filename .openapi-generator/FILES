@@ -86,6 +86,7 @@ lib/Model/MatrixWaypoint.php
 lib/Model/ModelInterface.php
 lib/Model/MotorScooterCostingOptions.php
 lib/Model/MotorcycleCostingOptions.php
+lib/Model/NearestRoadsCostingModel.php
 lib/Model/NearestRoadsRequest.php
 lib/Model/NodeId.php
 lib/Model/NodeType.php

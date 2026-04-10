@@ -157,7 +157,7 @@ class RoutingApiTest extends TestCase
             ->setUnits(DistanceUnit::MI)
             ->setCostingOptions((new CostingOptions())
                 ->setAuto((new AutoCostingOptions())->setUseHighways(0.3)))
-            ->setDateTime((new TimeConstraintV1())->setType(0));
+            ->setDateTime((new TimeConstraintV1())->setType('depart_now'));
         $result = $this->apiInstance->optimizedRoute($req);
         self::assertEquals($req->getId(), $result->getId());
         self::assertEquals(0, $result->getTrip()->getStatus());
