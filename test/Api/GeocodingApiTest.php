@@ -222,7 +222,13 @@ class GeocodingApiTest extends TestCase
      */
     public function testSearchStructured()
     {
-        $result = $this->apiInstance->searchStructured($this->address, null, null, null, null, null, null, "EE", lang: 'en');
+        $result = $this->apiInstance->searchStructured($this->address, country: "EE", lang: 'en');
+        self::assertNotCount(0, $result->getFeatures());
+        self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
+        self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
+
+        // Granular parameters
+        $result = $this->apiInstance->searchStructured(street: "Põhja pst", house_number: "27", country: "EE", lang: 'en');
         self::assertNotCount(0, $result->getFeatures());
         self::assertEquals('Estonia', $result->getFeatures()[0]->getProperties()->getCountry());
         self::assertEquals('address', $result->getFeatures()[0]->getProperties()->getLayer());
